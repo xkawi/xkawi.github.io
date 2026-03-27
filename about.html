@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Kawi Xiao — Fullstack JS & mobile engineer. Open-source enthusiast.">
+  <meta name="description" content="About Kawi Xiao — Fullstack JS & mobile engineer based in Singapore.">
   <meta name="author" content="Kawi Xiao">
   <link rel="icon" href="favicon.ico">
-  <title>Kawi Xiao</title>
+  <title>About — Kawi Xiao</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 </head>
 <body>
 
-  <!-- ── Mobile header (hidden on desktop) ──────────────── -->
+  <!-- ── Mobile header ──────────────────────────────────── -->
   <header class="mobile-header">
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
       <span></span><span></span><span></span>
@@ -29,8 +29,8 @@
     <button class="drawer-close" id="drawerClose" aria-label="Close menu">✕</button>
     <div class="drawer-name">Kawi Xiao</div>
     <ul class="drawer-nav">
-      <li><a href="/" class="active">Home</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
       <li><a href="https://medium.com/@kawixiao" target="_blank" rel="noopener">Writing</a></li>
       <li><a href="https://github.com/xkawi" target="_blank" rel="noopener">Projects</a></li>
       <li><a href="mailto:kawixiao@gmail.com">Contact</a></li>
@@ -51,7 +51,7 @@
     </div>
   </nav>
 
-  <!-- ── App shell ───────────────────────────────────────── -->
+  <!-- ── App shell ──────────────────────────────────────── -->
   <div class="app">
 
     <!-- SIDEBAR -->
@@ -62,8 +62,8 @@
       </div>
 
       <nav class="sidebar-nav" aria-label="Main navigation">
-        <a href="/" class="active">Home</a>
-        <a href="about.html">About</a>
+        <a href="/">Home</a>
+        <a href="about.html" class="active">About</a>
         <a href="https://medium.com/@kawixiao" target="_blank" rel="noopener">Writing</a>
         <a href="https://github.com/xkawi" target="_blank" rel="noopener">Projects</a>
         <a href="mailto:kawixiao@gmail.com">Contact</a>
@@ -88,104 +88,93 @@
       </div>
     </aside>
 
-    <!-- MAIN PANEL -->
-    <main class="main-panel">
+    <!-- MAIN PANEL — About page is freely scrollable -->
+    <main class="main-panel main-panel-scroll">
+      <div class="about-page">
 
-      <!-- WRITING — hero section -->
-      <section class="panel-writing">
-        <div class="panel-inner">
-          <h2 class="panel-label">Writing</h2>
-          <ul class="article-list">
-            <li class="article-item">
-              <a href="https://medium.com/@kawixiao" target="_blank" rel="noopener" class="article-link">
-                <div class="article-text">
-                  <h3 class="article-title">Redux Saga: Managing Side Effects the Right Way</h3>
-                  <p class="article-excerpt">A deep dive into generator-based middleware for predictable async flows in React apps.</p>
-                </div>
-                <span class="article-meta">
-                  <span class="article-tag">JavaScript</span>
-                  <span class="article-date">2017</span>
-                </span>
-              </a>
-            </li>
-            <li class="article-item">
-              <a href="https://medium.com/@kawixiao" target="_blank" rel="noopener" class="article-link">
-                <div class="article-text">
-                  <h3 class="article-title">Building Cross-Platform Mobile Apps with React Native</h3>
-                  <p class="article-excerpt">Lessons learned shipping to both iOS and Android from a single JavaScript codebase.</p>
-                </div>
-                <span class="article-meta">
-                  <span class="article-tag">Mobile</span>
-                  <span class="article-date">2017</span>
-                </span>
-              </a>
-            </li>
-            <li class="article-item">
-              <a href="https://medium.com/@kawixiao" target="_blank" rel="noopener" class="article-link">
-                <div class="article-text">
-                  <h3 class="article-title">Thinking in Open Source: Why I Contribute</h3>
-                  <p class="article-excerpt">On the compounding value of working in public, filing issues, and sending your first PR.</p>
-                </div>
-                <span class="article-meta">
-                  <span class="article-tag">Open Source</span>
-                  <span class="article-date">2016</span>
-                </span>
-              </a>
-            </li>
-          </ul>
-          <a href="https://medium.com/@kawixiao" target="_blank" rel="noopener" class="view-more">
-            View all articles <span aria-hidden="true">→</span>
-          </a>
+        <header class="about-header">
+          <h1 class="about-title">About</h1>
+          <a href="resume.pdf" target="_blank" rel="noopener" class="btn-resume">Download resume →</a>
+        </header>
+
+        <div class="about-body">
+          <div class="about-bio">
+            <p>
+              I'm a software engineer with a focus on fullstack JavaScript and mobile development.
+              I care deeply about building products that are fast, reliable, and genuinely useful —
+              from the API layer down to the last pixel of the UI.
+            </p>
+            <p>
+              My work spans web and mobile: backend services and REST APIs in Node.js, client-side
+              apps in React, and native experiences on iOS (Swift) and Android (Kotlin), as well as
+              cross-platform work with React Native.
+            </p>
+            <p>
+              I believe the best software is built incrementally, tested seriously, and shared openly.
+              I'm an active contributor to open-source projects and enjoy writing about what I learn
+              along the way.
+            </p>
+            <p>
+              Outside of engineering I think a lot about entrepreneurship — the intersection of
+              technology and building something that lasts.
+            </p>
+          </div>
+
+          <div class="about-meta-grid">
+            <div class="about-meta-block">
+              <h2>Currently</h2>
+              <p>Building fullstack web &amp; mobile experiences. Open to interesting projects and conversations.</p>
+            </div>
+
+            <div class="about-meta-block">
+              <h2>Based in</h2>
+              <p>Singapore</p>
+            </div>
+
+            <div class="about-meta-block">
+              <h2>Skills</h2>
+              <ul class="skill-list">
+                <li>JavaScript &amp; TypeScript</li>
+                <li>Node.js / Express / REST APIs</li>
+                <li>React / Next.js</li>
+                <li>React Native</li>
+                <li>iOS (Swift / Objective-C)</li>
+                <li>Android (Kotlin / Java)</li>
+                <li>SQL &amp; NoSQL databases</li>
+                <li>Git &amp; open-source workflows</li>
+              </ul>
+            </div>
+
+            <div class="about-meta-block">
+              <h2>Interests</h2>
+              <ul class="skill-list">
+                <li>Open-source software</li>
+                <li>Developer tooling</li>
+                <li>Web standards</li>
+                <li>Entrepreneurship</li>
+                <li>Tech communities</li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </section>
 
-      <!-- PROJECTS — bottom section -->
-      <section class="panel-projects">
-        <div class="panel-inner">
-          <h2 class="panel-label">Recent Projects</h2>
-          <ul class="project-list">
-            <li class="project-card">
-              <a href="slides/redux-saga-practical-intro/" target="_blank" rel="noopener" class="project-card-link">
-                <h3 class="project-card-title">Redux Saga Intro</h3>
-                <p class="project-card-desc">Conference talk &amp; slide deck on managing async side effects with generator functions.</p>
-                <div class="project-card-tags">
-                  <code>Redux</code><code>React</code>
-                </div>
-              </a>
-            </li>
-            <li class="project-card">
-              <a href="https://github.com/xkawi" target="_blank" rel="noopener" class="project-card-link">
-                <h3 class="project-card-title">Open Source</h3>
-                <p class="project-card-desc">Contributions to JavaScript tooling, libraries, and developer-focused projects on GitHub.</p>
-                <div class="project-card-tags">
-                  <code>Node.js</code><code>JS</code>
-                </div>
-              </a>
-            </li>
-            <li class="project-card">
-              <a href="https://github.com/xkawi" target="_blank" rel="noopener" class="project-card-link">
-                <h3 class="project-card-title">Mobile Apps</h3>
-                <p class="project-card-desc">Native iOS &amp; Android apps and cross-platform React Native projects for various clients.</p>
-                <div class="project-card-tags">
-                  <code>Swift</code><code>Kotlin</code>
-                </div>
-              </a>
-            </li>
-          </ul>
-          <a href="https://github.com/xkawi" target="_blank" rel="noopener" class="view-more view-more-right">
-            View all projects <span aria-hidden="true">→</span>
-          </a>
-        </div>
-      </section>
+        <footer class="about-footer">
+          <p>© <span id="year"></span> Kawi Xiao</p>
+          <nav class="about-footer-nav">
+            <a href="https://github.com/xkawi" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/kawixiao" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://medium.com/@kawixiao" target="_blank" rel="noopener">Medium</a>
+            <a href="mailto:kawixiao@gmail.com">Email</a>
+          </nav>
+        </footer>
 
+      </div>
     </main>
-  </div><!-- /.app -->
+  </div>
 
   <script>
-    // ── Year ────────────────────────────────────────────────
-    // (no footer on this page, but kept for about.html parity)
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ── Theme toggle ────────────────────────────────────────
     const root = document.documentElement;
     const stored = localStorage.getItem('theme');
     if (stored) root.setAttribute('data-theme', stored);
@@ -202,7 +191,6 @@
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
     document.getElementById('themeToggleSidebar').addEventListener('click', toggleTheme);
 
-    // ── Mobile drawer ───────────────────────────────────────
     const hamburger     = document.getElementById('hamburger');
     const drawer        = document.getElementById('drawer');
     const drawerOverlay = document.getElementById('drawerOverlay');
@@ -229,14 +217,8 @@
     hamburger.addEventListener('click', openDrawer);
     drawerClose.addEventListener('click', closeDrawer);
     drawerOverlay.addEventListener('click', closeDrawer);
-
-    // Close drawer on nav link tap
     drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
-
-    // Close on Escape
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeDrawer();
-    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
   </script>
 
 </body>
