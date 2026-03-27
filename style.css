@@ -600,31 +600,61 @@ h1, h2, h3 {
 /* ====================================================
    ARTICLES LISTING PAGE
    ==================================================== */
-.articles-listing { max-width: 760px; }
+.articles-listing { max-width: 680px; }
 
-.articles-listing-list .article-item {
-  border: none;
-  border-radius: 0;
-  background: none;
+.articles-listing-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.articles-listing-item {
   border-bottom: 1px solid var(--border);
 }
 
-.articles-listing-list .article-item:first-child {
+.articles-listing-item:first-child {
   border-top: 1px solid var(--border);
 }
 
-.articles-listing-list .article-item:hover {
-  border-color: var(--border);
-  background: var(--bg-hover);
+.articles-listing-link {
+  display: block;
+  padding: 1.75rem 0.5rem;
+  color: inherit;
+  text-decoration: none;
+  transition: background var(--ease);
   border-radius: var(--radius);
 }
 
-.articles-listing-list .article-link {
-  flex-direction: row;
+.articles-listing-item:hover .articles-listing-link {
+  background: var(--bg-hover);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.articles-listing-meta {
+  display: flex;
   align-items: center;
-  padding: 1.1rem 0.5rem;
-  justify-content: space-between;
-  gap: 1.5rem;
+  gap: 0.625rem;
+  margin-bottom: 0.5rem;
+}
+
+.articles-listing-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+  transition: color var(--ease);
+}
+
+.articles-listing-item:hover .articles-listing-title {
+  color: var(--accent);
+}
+
+.articles-listing-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
 }
 
 /* ====================================================
@@ -998,11 +1028,8 @@ h1, h2, h3 {
 
   .article-page-title { font-size: 1.5rem; }
 
-  .articles-listing-list .article-link {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem 0.5rem;
-    gap: 0.5rem;
+  .articles-listing-link {
+    padding: 1.25rem 0.5rem;
   }
 }
 
