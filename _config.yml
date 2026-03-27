@@ -1,0 +1,33 @@
+title:       Kawi Xiao
+description: Full Stack Engineer.
+author:      Kawi Xiao
+url:         "https://xkawi.github.io"
+
+# Articles live at /articles/2017/redux-saga-managing-side-effects/
+permalink: /articles/:year/:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+
+# Apply layout + main_class defaults by content type
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout:     article
+      main_class: main-panel-scroll
+  - scope:
+      path: "about.html"
+    values:
+      main_class: main-panel-scroll
+  - scope:
+      path: "articles"
+    values:
+      main_class: main-panel-scroll

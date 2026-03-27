@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta http-equiv="refresh" content="0; url=https://docs.google.com/presentation/d/1C99j3BHtAGLlsw8J72Mce3kE2K0y8u5RAjDhqFnKe1o/edit#slide=id.g24a7d118aa_0_276" />
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<section>
+						<h4>Redux Saga: Practical Introduction</h4>
+						<p>Real world use cases and why/when should you use it?</p>
+						<p style="font-size: 32px"><a href="https://github.com/xkawi">github.com/xkawi</a></p>
+					</section>
+					<section>
+						<h4>Agenda</h4>
+						<ul>
+							<li>Problems Redux Saga solved</li>
+							<li>Introduction to Redux Saga</li>
+							<li>Some Concepts: Generators, Redux Saga Effects</li>
+							<li>Examples & Demo</li>
+							<li>Why or when should you use it?</li>
+							<li>Advance Stuffs</li>
+							<li>Alternatives</li>
+						</ul>
+					</section>
+					<section>
+						<h4>before we start...</h4>
+						<ul>
+							<li>How many of you have <strong>not</strong> heard of Redux Saga?</li>
+							<li>Use it in Production?</li>
+							<li>How about Redux Thunk?</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>Once upon a time...</h4>
+						<p>managing side effects in React app looks like this:</p>
+						<code>{show redux-thunk code}</code>
+					</section>
+					<section>
+						<h4>Why this could be "problems"?</h4>
+						<ul>
+							<li>Callback Hell</li>
+							<li>Difficult to maintain as project grows</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>Redux Saga</h4>
+						<p>redux middleware to manage side effects (e.g. async network call) in a declarative and synchronous style</p>
+						<p>at the core, it uses ES6 feature called Generators<p> 
+					</section>
+					<section>
+						<h4>What's Generators?</h4>
+						<table>
+							<thead><tr><th>Before</th><th>After</th></tr></thead>
+							<tbody>
+								<tr>
+									<td><code>normal function</code></td>
+									<td><code>generator function</code></td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						it looks like async await, but it allows for more "control" over the flow and "communication" between functions/generators
+						<p>talk about calling .next()</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>Redux Saga in Action</h4>
+						<code>show redux thunk example</code>
+					</section>
+					<section>
+						<h4>Redux Saga Version</h4>
+						<code>
+							show redux saga version
+						</code>
+					</section>
+					<section>
+						<h4>Effects</h4>
+						<p>commonly used:</p>
+						<ul>
+							<li>
+								<code>take</code> - hello
+							</li>
+							<li>
+								<code>call</code> - hello
+							</li>
+							<li>
+								<code>put</code> - hello
+							</li>
+							<li>
+								<code>select</code> - hello
+							</li>
+							<li>
+								<code>fork</code> - hello
+							</li>
+						</ul>
+					</section>
+					<section>
+						Helper Effects
+						<ul>
+							<li>
+								<code>takeEvery</code> - hello
+							</li>
+							<li>
+								<code>takeLatest</code> - hello
+								<p>bring up Add To Board example</p>
+							</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>How to Setup Redux Saga into you Project?</h4>
+						<code>Show configureStore</code>
+					</section>
+					<section>
+						<h4>How to Setup Redux Saga into you Project?</h4>
+						<code>show rootSaga</code>
+					</section>
+				</section>
+				<section>
+					<section>
+						The "Good" Part
+					</section>
+					<section>
+						de-coupled m-v-c, literally
+					</section>
+					<section>
+						testing your biz logic, better
+					</section>
+				</section>
+				<section>
+					<section>The "Ugly" Part</section>
+					<section>learning curve, but once you get over it, you'll like it</section>
+					<section>sometime, it feels like "more work" to implement things, but this is in expense of long term maintainability</section>
+				</section>
+				<section>
+					<section>
+						some doubts that you may encounter
+						<ul>
+							<li>should I put all logic into saga? including UI logic? share about implementation of filter component/state. ans: who should manage or concern about this piece of data? is it only the component? or some other components also need it?</li>
+							<li>where should I put this piece of logic? component lifecycle? saga? redux store? action? share about the experience on setting up intercom where it depends on an authentication state (updates are managed by the saga, so the saga is the source of truth on this) and DOM manipulation (only accessible within react lifecycle, which is not available within saga). At the end we implemented within the react lifecylce with more conditional checks at componentWillRecieveProp to ensure that it only happens when authentication state is changed.</li>
+						</ul>
+					</section>
+					
+				</section>
+				<section>
+					<section>Advance Stuff</section>
+					<section>learning curve, but once you get over it, you'll like it</section>
+					<section>sometime, it feels like "more work" to implement things, but this is in expense of long term maintainability</section>
+				</section>
+				<section>
+					<section>Verdict?</section>
+					<section>if it's a simple app, without much requirement, or simple CRUD apps, stick with what you are comfortable with</section>
+					<section>if you are maintaining bigger apps with lots of pieces that need to work together, consider using redux saga</section>
+				</section>
+				<section>
+					<a href="http://kawi.me/slides/redux-saga-practical-intro">kawi.me/slides/redux-saga-practical-intro</a>
+					<a href="https://github.com/xkawi/react-universal-saga-modular">github.com/xkawi/react-universal-saga-modular</a>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

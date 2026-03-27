@@ -1,0 +1,52 @@
+<script>
+  // ── Year (used on about page footer) ────────────────────
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ── Theme toggle ────────────────────────────────────────
+  const root   = document.documentElement;
+  const stored = localStorage.getItem('theme');
+  if (stored) root.setAttribute('data-theme', stored);
+
+  function toggleTheme() {
+    const current = root.getAttribute('data-theme');
+    const isDark  = current === 'dark' ||
+      (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const next = isDark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  }
+
+  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+  document.getElementById('themeToggleSidebar').addEventListener('click', toggleTheme);
+
+  // ── Mobile drawer ───────────────────────────────────────
+  const hamburger     = document.getElementById('hamburger');
+  const drawer        = document.getElementById('drawer');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerClose   = document.getElementById('drawerClose');
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    drawerOverlay.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    drawerOverlay.setAttribute('aria-hidden', 'false');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    drawerOverlay.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    drawerOverlay.setAttribute('aria-hidden', 'true');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', closeDrawer);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+</script>

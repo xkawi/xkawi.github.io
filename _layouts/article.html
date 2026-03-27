@@ -1,0 +1,27 @@
+---
+layout: default
+---
+<article class="article-page">
+
+  <header class="article-page-header">
+    <div class="article-page-meta">
+      {% for tag in page.tags %}
+        <span class="article-tag">{{ tag }}</span>
+      {% endfor %}
+      <span class="article-date">{{ page.date | date: "%B %-d, %Y" }}</span>
+    </div>
+    <h1 class="article-page-title">{{ page.title }}</h1>
+    {% if page.description %}
+      <p class="article-page-lead">{{ page.description }}</p>
+    {% endif %}
+  </header>
+
+  <div class="article-page-content">
+    {{ content }}
+  </div>
+
+  <footer class="article-page-footer">
+    <a href="{{ '/articles/' | relative_url }}" class="article-back">← All articles</a>
+  </footer>
+
+</article>
