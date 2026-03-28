@@ -21,6 +21,8 @@ It is fully built by Claude. It started with me asking for a design/styling refr
 
 With that said, I intend to consolidate all my past writings in this website too. I can already see myself to have a lot to writes or says as I reflect on those past writings. Good old days MERN stack to name one, how I envisioned software engineering with AI back in 2017, and many more. I hope to keep writing too, so stay tuned!
 
+I also want to gather all my past projects that were scattered around and open source them for my own quick references, or anyone who are interested to check them out too. So you can expect to see more to come.
+
 Closing remarks, I hope to use this avenue to express myself more on the internet, on professional context rather than a personal blogspot. If you would like to stay in touch with me, feel free to connect with me on LinkedIn, or follow my GitHub profile.
 
 Cheers!
