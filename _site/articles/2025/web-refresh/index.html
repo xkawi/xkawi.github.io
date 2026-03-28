@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Lessons learned shipping to both iOS and Android from a single JavaScript codebase.">
+  <meta name="description" content="Introductory notes on my portfolio website refresh with the help of AI">
   <meta name="author" content="Kawi Xiao">
   <link rel="icon" href="/favicon.ico">
-  <title>Building Cross-Platform Mobile Apps with React Native — Kawi Xiao</title>
+  <title>Porfolio Website Refresh — Kawi Xiao</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -65,7 +65,7 @@
     <a href="/">Home</a>
     <a href="/about">About</a>
     <a href="/articles/" class="active">Writing</a>
-    <a href="https://github.com/xkawi" target="_blank" rel="noopener">Projects</a>
+    <a href="https://github.com/xkawi" target="_blank" rel="noopener">GitHub Projects</a>
     <a href="mailto:kawixiao@gmail.com">Contact</a>
   </nav>
 
@@ -94,57 +94,34 @@
   <header class="article-page-header">
     <div class="article-page-meta">
       
-        <span class="article-tag">Mobile</span>
-      
-      <span class="article-date">June 1, 2017</span>
+      <span class="article-date">March 28, 2025</span>
     </div>
-    <h1 class="article-page-title">Building Cross-Platform Mobile Apps with React Native</h1>
+    <h1 class="article-page-title">Porfolio Website Refresh</h1>
     
-      <p class="article-page-lead">Lessons learned shipping to both iOS and Android from a single JavaScript codebase.</p>
+      <p class="article-page-lead">Introductory notes on my portfolio website refresh with the help of AI</p>
     
   </header>
 
   <div class="article-page-content">
-    <p>When React Native launched, the promise was straightforward: write JavaScript once, ship to iOS and Android. After shipping several apps with it, the reality is nuanced — but more positive than the skeptics expected.</p>
+    <p>As I was having the infrequent reflection moment and with the recent trends of AI model, my mind was brought back into this portfolio website that I have not been maintaining since 2016, almost 10 years.</p>
 
-<h2 id="the-good-parts">The good parts</h2>
+<p>It was using unsplash API as the background image (fullscreen too, no less), which I believe has been broken for ages. My bio sounded “old” in today’s age, or rather “still young” as it was written when I just started my career.</p>
 
-<p><strong>Shared business logic</strong> is where React Native really delivers. Navigation state, API calls, data transforms, validation — all of it runs from a single JS bundle. For a team that already knows React, the ramp-up is measured in days, not months.</p>
+<p>My profile picture on the favicon was when I still skinny (not that I grew wider horizontally now, but let’s just say, I have… changed.) wearing a formal shirt which was taken during one of the bank recruitment event (iirc it was Credit Suisse) that I attended back in school time, which of course I did not take up.</p>
 
-<p><strong>Hot reloading</strong> is legitimately faster than native development. Seeing a layout change reflected in under a second, without a full recompile, changes how you explore UI ideas.</p>
+<p>I also had a “buy me coffee” button which led to a paypal page for people to “donate” (it is still <a href="https://www.paypal.com/paypalme/KawiXiao/3usd">working by the way</a>, so if you feel like it, my paypal wallet still open to accept your donation 😉), and in 10 years of the website’s life, I managed to receive USD 3 from “Digital Karma”, and the reason? “Redux-saga module project is awesome.” Someone appreciated my open source contribution apparently, felt good back then regardless of the amount. Hey Digital Karma, if you read this article somehow, thank you for your coffee!</p>
 
-<p><strong>Community and ecosystem</strong> have caught up considerably. Libraries for maps, cameras, payments, and analytics cover the common use cases. When something isn’t covered, the native module bridge lets you drop into Swift or Kotlin without abandoning the JS layer.</p>
+<p>Fast forward to 2026, where AI is everywhere, equipped with my curiousity to learn more about it, I was like: “<em>hey why not refresh my bio page using Claude?</em>”</p>
 
-<h2 id="the-parts-that-bite-you">The parts that bite you</h2>
+<p>With that, the design you are seeing right now is what it generates. Pretty happy with it.</p>
 
-<h3 id="platform-divergence-is-real">Platform divergence is real</h3>
+<p>It is fully built by Claude. It started with me asking for a design/styling refresh only (which imo it does pretty well, with light/dark mode theme supports too), but then I thought “why not add articles in as well?” I prompted that to Claude and it suggested Jekyll (instead of the latest modern way of Astro or Gatsby) which is supported by Github Pages out of the box, and it’s free! Who would say no to free stuff?</p>
 
-<p>React Native gives you a shared component model, but not a shared design system. iOS and Android have different conventions — back-navigation, typography, gesture handling, sheet modals. Apps that ignore this feel wrong on both platforms. Budget time to write platform-specific variants using the <code class="language-plaintext highlighter-rouge">.ios.js</code> / <code class="language-plaintext highlighter-rouge">.android.js</code> file convention:</p>
+<p>With that said, I intend to consolidate all my past writings in this website too. I can already see myself to have a lot to writes or says as I reflect on those past writings. Good old days MERN stack to name one, how I envisioned software engineering with AI back in 2017, and many more. I hope to keep writing too, so stay tuned!</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>components/
-  Button.js          ← shared logic
-  Button.ios.js      ← iOS-specific styling
-  Button.android.js  ← Android-specific styling
-</code></pre></div></div>
+<p>Closing remarks, I hope to use this avenue to express myself more on the internet, on professional context rather than a personal blogspot. If you would like to stay in touch with me, feel free to connect with me on LinkedIn, or follow my GitHub profile.</p>
 
-<h3 id="the-bridge-is-a-bottleneck">The bridge is a bottleneck</h3>
-
-<p>Before the New Architecture (Fabric + JSI), heavy animations that crossed the JS/native bridge could stutter. The rule was simple: if it needs to run at 60fps, do it natively or use <code class="language-plaintext highlighter-rouge">Animated</code> with <code class="language-plaintext highlighter-rouge">useNativeDriver: true</code>. With JSI, synchronous native calls are now possible, which removes most of this concern for new projects.</p>
-
-<h3 id="build-tooling-is-fragile">Build tooling is fragile</h3>
-
-<p>CocoaPods on iOS and Gradle on Android have their own dependency resolution models that occasionally conflict with the JS layer. Keep a clean upgrade checklist. Pin your React Native version at the start of a project and upgrade deliberately, not reactively.</p>
-
-<h2 id="what-id-tell-my-past-self">What I’d tell my past self</h2>
-
-<ol>
-  <li>Start with <a href="https://expo.dev">Expo</a> for any app that doesn’t need custom native modules. The managed workflow eliminates most tooling pain.</li>
-  <li>Use TypeScript from day one. The JS/native boundary is already stringly-typed enough.</li>
-  <li>Test on a real device early. The simulator lies about performance and gesture feel.</li>
-  <li>Hire one iOS and one Android engineer to review your platform-specific code, even if you’re a JS team.</li>
-</ol>
-
-<p>React Native is not a silver bullet, but for the right team and the right product it genuinely halves the mobile development surface area. That’s a real advantage.</p>
+<p>Cheers!</p>
 
   </div>
 

@@ -15,6 +15,7 @@ title: Kawi Xiao
             {% if forloop.first %}<span class="article-featured-label">Latest</span>{% endif %}
             <h3 class="article-title">{{ post.title }}</h3>
             <p class="article-excerpt">{{ post.description }}</p>
+            <p class="article-content">{{ post.excerpt | strip_html }}</p>
           </div>
           <span class="article-meta">
             {% for tag in post.tags limit:1 %}
@@ -37,36 +38,37 @@ title: Kawi Xiao
   <div class="panel-inner">
     <h2 class="panel-label">Recent Projects</h2>
     <ul class="project-list">
+      
       <li class="project-card">
-        <a href="slides/redux-saga-practical-intro/" target="_blank" rel="noopener" class="project-card-link">
-          <h3 class="project-card-title">Redux Saga Intro</h3>
-          <p class="project-card-desc">Conference talk &amp; slide deck on managing async side effects with generator functions.</p>
+        <a href="https://floenergy.sg" target="_blank" rel="noopener" class="project-card-link">
+          <h3 class="project-card-title">Flo Energy</h3>
+          <p class="project-card-desc">Contributing to early development of the whole systems, and recently internal platform tooling.</p>
+          <div class="project-card-tags">
+            <code>CI/CD</code><code>Python</code><code>Platform Engineering</code>
+          </div>
+        </a>
+      </li>
+      <li class="project-card">
+        <a href="https://github.com/xkawi/react-universal-saga" target="_blank" rel="noopener" class="project-card-link">
+          <h3 class="project-card-title">React Universal Saga (and Modular)</h3>
+          <p class="project-card-desc">React project boilerplate with SSR and stuffs, very early days, but do not use them.</p>
+          <div class="project-card-tags">
+            <code>React</code><code>Redux</code><code>Redux Saga</code>
+          </div>
+        </a>
+      </li>
+      <li class="project-card">
+        <a href="https://qanvast.com" target="_blank" rel="noopener" class="project-card-link">
+          <h3 class="project-card-title">Qanvast</h3>
+          <p class="project-card-desc">Built the early version of the web, that gave birth to React Universal Saga boilerplate project.</p>
           <div class="project-card-tags">
             <code>Redux</code><code>React</code>
           </div>
         </a>
       </li>
-      <li class="project-card">
-        <a href="https://github.com/xkawi" target="_blank" rel="noopener" class="project-card-link">
-          <h3 class="project-card-title">Open Source</h3>
-          <p class="project-card-desc">Contributions to JavaScript tooling, libraries, and developer-focused projects on GitHub.</p>
-          <div class="project-card-tags">
-            <code>Node.js</code><code>JS</code>
-          </div>
-        </a>
-      </li>
-      <li class="project-card">
-        <a href="https://github.com/xkawi" target="_blank" rel="noopener" class="project-card-link">
-          <h3 class="project-card-title">Mobile Apps</h3>
-          <p class="project-card-desc">Native iOS &amp; Android apps and cross-platform React Native projects for various clients.</p>
-          <div class="project-card-tags">
-            <code>Swift</code><code>Kotlin</code>
-          </div>
-        </a>
-      </li>
     </ul>
     <a href="https://github.com/xkawi" target="_blank" rel="noopener" class="view-more view-more-right">
-      View all projects <span aria-hidden="true">→</span>
+      View all open source projects <span aria-hidden="true">→</span>
     </a>
   </div>
 </section>
