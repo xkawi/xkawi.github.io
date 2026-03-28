@@ -605,29 +605,24 @@ h1, h2, h3 {
 .articles-listing-list {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem; /* 8px between cards — keeps the list compact but breathable */
 }
 
 .articles-listing-item {
-  border-bottom: 1px solid var(--border);
-}
-
-.articles-listing-item:first-child {
-  border-top: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .articles-listing-link {
   display: block;
-  padding: 1.75rem 0.5rem;
+  padding: 1.25rem 1rem; /* 20px vertical — meets 44px min touch target with content */
   color: inherit;
   text-decoration: none;
-  transition: background var(--ease);
   border-radius: var(--radius);
+  transition: background var(--ease);
 }
 
 .articles-listing-item:hover .articles-listing-link {
   background: var(--bg-hover);
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .articles-listing-meta {
@@ -1028,9 +1023,6 @@ h1, h2, h3 {
 
   .article-page-title { font-size: 1.5rem; }
 
-  .articles-listing-link {
-    padding: 1.25rem 0.5rem;
-  }
 }
 
 /* Very small screens */
