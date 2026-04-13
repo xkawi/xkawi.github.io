@@ -6,7 +6,7 @@
   <meta name="description" content="Full Stack Engineer.">
   <meta name="author" content="Kawi Xiao">
   <link rel="icon" href="/favicon.ico">
-  <title>Writing — Kawi Xiao</title>
+  <title>Projects — Kawi Xiao — Kawi Xiao</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -43,8 +43,8 @@
   <ul class="drawer-nav">
     <li><a href="/">Home</a></li>
     <li><a href="/about">About</a></li>
-    <li><a href="/articles/" class="active">Writing</a></li>
-    <li><a href="/projects/">Projects</a></li>
+    <li><a href="/articles/">Writing</a></li>
+    <li><a href="/projects/" class="active">Projects</a></li>
     <li><a href="mailto:kawixiao@gmail.com">Contact</a></li>
   </ul>
   <div class="drawer-social">
@@ -75,8 +75,8 @@
   <nav class="sidebar-nav" aria-label="Main navigation">
     <a href="/">Home</a>
     <a href="/about">About</a>
-    <a href="/articles/" class="active">Writing</a>
-    <a href="/projects/">Projects</a>
+    <a href="/articles/">Writing</a>
+    <a href="/projects/" class="active">Projects</a>
     <a href="mailto:kawixiao@gmail.com">Contact</a>
   </nav>
 
@@ -100,24 +100,205 @@
 </aside>
 
   <main class="main-panel main-panel-scroll">
-    <div class="articles-listing">
-  <div class="panel-inner">
-    <h2 class="panel-label">All Writing</h2>
-    <ul class="articles-listing-list">
+    <div class="projects-page">
+  <header class="projects-header">
+    <h1 class="projects-title">Projects</h1>
+    <p class="projects-lead">Things I've built, contributed to, or shipped — at work and on the side.</p>
+  </header>
+
+  
+  
+  <section class="projects-group">
+    <h2 class="projects-group-label">Active</h2>
+    <ul class="projects-list">
       
-      <li class="articles-listing-item">
-        <a href="/articles/2025/web-refresh/" class="articles-listing-link">
-          <div class="articles-listing-meta">
+      <li class="project-entry">
+        <div class="project-entry-header">
+          <a href="https://floenergy.sg" target="_blank" rel="noopener" class="project-entry-title">
+            Flo Energy
             
-            <span class="article-date">March 2025</span>
+            <svg class="project-entry-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            
+          </a>
+          <div class="project-entry-meta">
+            <span class="project-year">2021</span>
           </div>
-          <h3 class="articles-listing-title">Porfolio Website Refresh</h3>
-          <p class="articles-listing-excerpt">Introductory notes on my portfolio website refresh with the help of AI</p>
-        </a>
+        </div>
+        <p class="project-entry-desc">Contributed to early development of the whole systems — in-house ERP system, public-facing website, internal backend services, 3rd-party integration tooling, ci/cd pipelines, deployment management. More recently focused on internal platform tooling and developer experience improvements across the engineering org.
+</p>
+        <div class="project-entry-tags">
+          
+          <code>CI/CD</code>
+          
+          <code>Python</code>
+          
+          <code>Platform Engineering</code>
+          
+          <code>Spring Boot</code>
+          
+          <code>Kotlin</code>
+          
+          <code>Renewable Energy</code>
+          
+        </div>
+      </li>
+      
+      <li class="project-entry">
+        <div class="project-entry-header">
+          <a href="https://github.com/plymor/plymor" target="_blank" rel="noopener" class="project-entry-title">
+            plymor
+            
+            <svg class="project-entry-icon project-entry-icon--github" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-label="GitHub"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            
+          </a>
+          <div class="project-entry-meta">
+            <span class="project-year">2026</span>
+          </div>
+        </div>
+        <p class="project-entry-desc">Building my "dream tool" assisted by Claude Code - plymor — a vendor-neutral CI/CD tooling for building and deploying applications managed in a polyglot monorepo. Aims to provide a unified interface regardless of the underlying language, framework, or cloud target.
+</p>
+        <div class="project-entry-tags">
+          
+          <code>Monorepo</code>
+          
+          <code>CI/CD</code>
+          
+          <code>Build Orchestrator</code>
+          
+          <code>Deployment Automation</code>
+          
+          <code>Docker</code>
+          
+        </div>
+      </li>
+      
+      <li class="project-entry">
+        <div class="project-entry-header">
+          <a href="https://hartamu.com" target="_blank" rel="noopener" class="project-entry-title">
+            Harta
+            
+            <svg class="project-entry-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            
+          </a>
+          <div class="project-entry-meta">
+            <span class="project-year">2026</span>
+          </div>
+        </div>
+        <p class="project-entry-desc">An AI-powered expense tracking app that provides spending insights and cashflow projections. Proudly co-developed with Claude Code. Currently invite-only with limited anonymous usage — drop me an email if you're interested in trying it out!
+</p>
+        <div class="project-entry-tags">
+          
+          <code>Side Project</code>
+          
+          <code>Cashflow Management</code>
+          
+          <code>AI Agent</code>
+          
+          <code>Expense Tracker</code>
+          
+          <code>Next.js</code>
+          
+          <code>Docker</code>
+          
+        </div>
       </li>
       
     </ul>
-  </div>
+  </section>
+  
+
+  
+  
+  <section class="projects-group">
+    <h2 class="projects-group-label">Past</h2>
+    <ul class="projects-list">
+      
+      <li class="project-entry">
+        <div class="project-entry-header">
+          <a href="https://github.com/xkawi/react-universal-saga" target="_blank" rel="noopener" class="project-entry-title">
+            React Universal Saga (and Modular)
+            
+            <svg class="project-entry-icon project-entry-icon--github" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-label="GitHub"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            
+          </a>
+          <div class="project-entry-meta">
+            <span class="project-year">2016</span>
+          </div>
+        </div>
+        <p class="project-entry-desc">A React project boilerplate with server-side rendering, built in the early days of React (2016) to demonstrate SSR and Redux Saga concepts. Spawned the Modular variant and later inspired the Redux Saga talk below.
+</p>
+        <div class="project-entry-tags">
+          
+          <code>React</code>
+          
+          <code>Redux</code>
+          
+          <code>Redux Saga</code>
+          
+          <code>SSR</code>
+          
+          <code>Boilerplate</code>
+          
+        </div>
+      </li>
+      
+      <li class="project-entry">
+        <div class="project-entry-header">
+          <a href="https://docs.google.com/presentation/d/1C99j3BHtAGLlsw8J72Mce3kE2K0y8u5RAjDhqFnKe1o/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener" class="project-entry-title">
+            Redux Saga: Practical Introduction
+            
+            <svg class="project-entry-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Slides"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            
+          </a>
+          <div class="project-entry-meta">
+            <span class="project-year">2017</span>
+          </div>
+        </div>
+        <p class="project-entry-desc">A talk given at a local meetup in 2017 covering Redux Saga in practice — when to use it, how it compares to redux-thunk, and patterns for managing complex async flows. Closely tied to the React Universal Saga boilerplate.
+</p>
+        <div class="project-entry-tags">
+          
+          <code>Redux Saga</code>
+          
+          <code>React</code>
+          
+          <code>Talk</code>
+          
+        </div>
+      </li>
+      
+      <li class="project-entry">
+        <div class="project-entry-header">
+          <a href="https://qanvast.com" target="_blank" rel="noopener" class="project-entry-title">
+            Qanvast
+            
+            <svg class="project-entry-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            
+          </a>
+          <div class="project-entry-meta">
+            <span class="project-year">2016</span>
+          </div>
+        </div>
+        <p class="project-entry-desc">Built the early version of the web and mobile applications for this interior design platform, working closely with the founding team. This project directly gave birth to the React Universal Saga boilerplate as a way to share and codify the patterns we developed.
+</p>
+        <div class="project-entry-tags">
+          
+          <code>React</code>
+          
+          <code>Mobile</code>
+          
+          <code>Web</code>
+          
+          <code>Startup</code>
+          
+          <code>Interior Design</code>
+          
+        </div>
+      </li>
+      
+    </ul>
+  </section>
+  
 </div>
 
   </main>

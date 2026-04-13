@@ -1,0 +1,112 @@
+# Projects data source
+# Fields:
+#   title:       display name
+#   url:         link target
+#   type:        "website" | "github" | "slides"
+#   description: full description (shown on /projects/ page)
+#   tags:        list of tech/topic labels
+#   status:      "active" | "past"
+#   featured:    true = show on homepage (keep to 3)
+#   year:        start year
+
+- title: "Flo Energy"
+  url: "https://floenergy.sg"
+  type: website
+  description: >
+    Contributed to early development of the whole systems — in-house ERP system, public-facing website,
+    internal backend services, 3rd-party integration tooling, ci/cd pipelines, deployment management. More recently focused on internal
+    platform tooling and developer experience improvements across the engineering org.
+  tags:
+    - CI/CD
+    - Python
+    - Platform Engineering
+    - Spring Boot
+    - Kotlin
+    - Renewable Energy
+  status: active
+  featured: true
+  year: 2021
+
+- title: "plymor"
+  url: "https://github.com/plymor/plymor"
+  type: github
+  description: >
+    Building my "dream tool" assisted by Claude Code - plymor — a vendor-neutral CI/CD tooling for building
+    and deploying applications managed in a polyglot monorepo. Aims to provide a unified interface
+    regardless of the underlying language, framework, or cloud target.
+  tags:
+    - Monorepo
+    - CI/CD
+    - Build Orchestrator
+    - Deployment Automation
+    - Docker
+  status: active
+  featured: true
+  year: 2026
+
+- title: "Harta"
+  url: "https://hartamu.com"
+  type: website
+  description: >
+    An AI-powered expense tracking app that provides spending insights and cashflow projections.
+    Proudly co-developed with Claude Code. Currently invite-only with limited anonymous usage —
+    drop me an email if you're interested in trying it out!
+  tags:
+    - Side Project
+    - Cashflow Management
+    - AI Agent
+    - Expense Tracker
+    - Next.js
+    - Docker
+  status: active
+  featured: true
+  year: 2026
+
+- title: "React Universal Saga (and Modular)"
+  url: "https://github.com/xkawi/react-universal-saga"
+  type: github
+  description: >
+    A React project boilerplate with server-side rendering, built in the early days of React (2016)
+    to demonstrate SSR and Redux Saga concepts. Spawned the Modular variant and later inspired
+    the Redux Saga talk below.
+  tags:
+    - React
+    - Redux
+    - Redux Saga
+    - SSR
+    - Boilerplate
+  status: past
+  featured: false
+  year: 2016
+
+- title: "Redux Saga: Practical Introduction"
+  url: "https://docs.google.com/presentation/d/1C99j3BHtAGLlsw8J72Mce3kE2K0y8u5RAjDhqFnKe1o/edit?slide=id.p#slide=id.p"
+  type: slides
+  description: >
+    A talk given at a local meetup in 2017 covering Redux Saga in practice — when to use it,
+    how it compares to redux-thunk, and patterns for managing complex async flows. Closely tied
+    to the React Universal Saga boilerplate.
+  tags:
+    - Redux Saga
+    - React
+    - Talk
+  status: past
+  featured: false
+  year: 2017
+
+- title: "Qanvast"
+  url: "https://qanvast.com"
+  type: website
+  description: >
+    Built the early version of the web and mobile applications for this interior design platform,
+    working closely with the founding team. This project directly gave birth to the React Universal
+    Saga boilerplate as a way to share and codify the patterns we developed.
+  tags:
+    - React
+    - Mobile
+    - Web
+    - Startup
+    - Interior Design
+  status: past
+  featured: false
+  year: 2016
