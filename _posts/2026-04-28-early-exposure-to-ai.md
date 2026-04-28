@@ -2,7 +2,7 @@
 title: "My 'accidental' early exposure to AI"
 date: 2026-04-28
 description: ""
-tags: []
+tags: [AI, Supervised Learning, Naive Bayes Classifier, Token]
 ---
 
 Long story short, I was actually exposed to "AI" back in 2011 without me realising it. It was a Final Year Project during my Diploma time when me and a few of my friends implemented a Supervised Learning algorithm called Naive Bayes Classifier. The project was simple: first, train the model with a preset of data with labels (negative tweet, neutral, or positive tweet), and then fetch all the tweets for a given user and classify each tweet using the trained model if they are negative or positive.

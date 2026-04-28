@@ -105,6 +105,14 @@
   <header class="article-page-header">
     <div class="article-page-meta">
       
+        <span class="article-tag">AI</span>
+      
+        <span class="article-tag">Supervised Learning</span>
+      
+        <span class="article-tag">Naive Bayes Classifier</span>
+      
+        <span class="article-tag">Token</span>
+      
       <span class="article-date">April 28, 2026</span>
     </div>
     <h1 class="article-page-title">My 'accidental' early exposure to AI</h1>
@@ -118,9 +126,9 @@
 
 <p>Let’s expand a little bit more on the project itself.</p>
 
-<p>The problem statement is simple: given a public twitter account (e.g. a school handle), we want to analyse their tweets timeline and classify if they appear to be giving negative sentiments or positive, or neutral and observe the distributions of those sentiments whether negative has higher count than positive.</p>
+<p>The problem statement is simple: given a public Twitter account (e.g. a school handle), we want to analyse their tweets timeline and classify if they appear to be giving negative sentiments or positive, or neutral and observe the distributions of those sentiments whether negative has higher count than positive.</p>
 
-<p>The first order of business is of course to train the classifier model. We were tasked to implement the model using Naive Bayes Classifier, which is a supervised learning algorithm. Consequently, we prepared a set of training data, which is a list of texts with labels for each of them (e.g. “f*** off” labelled as ‘negative’). For the actual training logic, we implemented it in NodeJS with the help of <a href="https://www.npmjs.com/package/natural?activeTab=dependencies">Natural</a> npm package. At the end of the training run, it outputs a <code class="language-plaintext highlighter-rouge">classifier.json</code> file, which is then used to classify each tweet. There are also stop words that we have to feed into the model, and also the concept of tokenizing the tweets into words, and many more. For more details on how the algorithm works, the <a href="https://naturalnode.github.io/natural/bayesian_classifier.html">documentation</a> will do a much better job than me.</p>
+<p>The first order of business is of course to train the classifier model. We were tasked to implement the model using Naive Bayes Classifier, which is a supervised learning algorithm. Consequently, we prepared a set of training data, which is a list of texts with labels for each of them (e.g. “f*** off” labelled as ‘negative’). For the actual training logic, we implemented it in Node.js with the help of <a href="https://www.npmjs.com/package/natural?activeTab=dependencies">Natural</a> npm package. At the end of the training run, it outputs a <code class="language-plaintext highlighter-rouge">classifier.json</code> file, which is then used to classify each tweet. There are also stop words that we have to feed into the model, and also the concept of tokenizing the tweets into words, and many more. For more details on how the algorithm works, the <a href="https://naturalnode.github.io/natural/bayesian_classifier.html">documentation</a> will do a much better job than me.</p>
 
 <p>Last but not least, we have to implement the tweets fetching itself. This is pretty straightforward: use a Twitter API library, set up the necessary authentication, and then use the library to fetch the tweets (e.g. <code class="language-plaintext highlighter-rouge">Twit().fetchTimelines()</code>). Then we just loop through each tweet, and feed it into the trained model to be classified, and then we save those results into a file for manual review.</p>
 
@@ -133,11 +141,15 @@
   <li>AI models are just like the classifier.json file I mentioned above, just that it operates on a much larger data size, hence it is called Large-Language Model, but the fundamentals remain the same.</li>
 </ol>
 
-<p>Having said that, there are still a lot I have to learn and still curious about on how it works/implemented, one of them being, how video generation actually works under the hood? As fascinating as it appears to be, I still have no clue the underlying technology behind it.</p>
+<p>Having said that, there is still a lot I have to learn and am still curious about on how it works/implemented, one of them being, how video generation actually works under the hood? As fascinating as it appears to be, I still have no clue about the underlying technology behind it.</p>
 
-<p>In retrospect, iirc, this Sentiment Analysis project was assigned to us, not by choice. So, we were very anxious about the project since at that point the project requirements appeared to be quite complex and challenging to implement for a student, which of course could affect our grade if we could not deliver. Luckily we had a good project sponsor and mentor to guide us through out. It was indeed challenging, but we managed to deliver and were given a good grade, which I suspect mainly for our effort too, not necessarily due to the quality of the deliverable. And fast forward to today, I am really glad for that incidental exposure, as it is now proven to be useful for me to quickly get up to speed on the AI train.</p>
+<p>In retrospect, iirc, this Sentiment Analysis project was assigned to us, not by choice. So, we were more worried than excited about the challenging project, because from a student’s perspective the project requirements actually appeared to be quite complex and challenging, which of course could affect our grade if we could not deliver.</p>
 
-<p>All in all, stay curious, keep learning, you never know when it will come in handy!</p>
+<p>Luckily we had a good project sponsor and mentor to guide us throughout. It was indeed challenging, but we managed to deliver and were given a good grade, which I suspect was mainly for our effort too, not necessarily due to the quality of the deliverable (because the code is really not that great, hah.)</p>
+
+<p>And fast forward to today, I am really glad for that “accidental” exposure (partly because back then the project was categorised as “machine learning” rather than “artificial intelligence”), because now the knowledge gained is proven to be useful for me to quickly get up to speed on the AI train.</p>
+
+<p>Key takeaway? Stay curious, keep learning, as you never know when it will come in handy!</p>
 
 <p>Cheers!</p>
 
