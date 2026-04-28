@@ -110,3 +110,36 @@
   status: past
   featured: false
   year: 2016
+
+- title: "SgBusTimeBot"
+  url: "https://github.com/xkawi/sgbustimebot"
+  type: github
+  description: >
+    A Telegram bot that provides real-time bus arrival information for Singapore. Built as a side project
+    to learn about Telegram's Bot API and serverless deployment. It scrapes data from the Land Transport Authority's public APIs and serves it in a user-friendly format. It has not been maintained anymore, but I still do own the telegram bot handle.
+  tags:
+    - Telegram Bot
+    - Serverless
+    - NodeJS
+    - Side Project
+    - ExpressJS
+    - Early Career
+  status: past
+  featured: false
+  year: 2015
+
+- title: "MarkItBot"
+  url: "https://github.com/xkawi/markitbot"
+  type: github
+  description: >
+    Quickly drop any online link to a Telegramt chatbot to bookmark it and quickly search it back just by typing your search query. Built as a side project to learn about Telegram's Bot API and serverless deployment. It has not been maintained anymore, but I still do own the telegram bot handle.
+  tags:
+    - Telegram Bot
+    - Serverless
+    - NodeJS
+    - Side Project
+    - ExpressJS
+    - Early Career
+  status: past
+  featured: false
+  year: 2015
