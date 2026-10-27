@@ -220,7 +220,7 @@ h1, h2, h3 {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* no page scroll on desktop */
+  overflow-y: auto; /* fits without scrolling on tall screens; scrolls instead of clipping on short ones */
 }
 
 /* About page: allow scroll */
@@ -249,8 +249,7 @@ h1, h2, h3 {
 
 /* ── Writing section (flex: 1, takes remaining space) */
 .panel-writing {
-  flex: 1;
-  overflow: hidden;
+  flex: 1 0 auto; /* fill the spare height, but never shrink below the articles (that clipped "View all articles") */
   border-bottom: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -343,6 +342,21 @@ h1, h2, h3 {
   font-size: 0.8125rem;
   color: var(--text-muted);
   line-height: 1.6;
+}
+
+/* The opening paragraph is shown whole, so cap it: a long one in a small card used to push
+   "View all articles" off the screen. */
+.article-content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+.article-item--featured .article-content {
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
 }
 
 .article-meta {
