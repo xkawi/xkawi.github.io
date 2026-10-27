@@ -3,7 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Agents that ship when the spec says so</title>
+<title>Agents that ship when the spec says so: a hands-on course on spec-driven agent development</title>
+<meta name="description" content="A free, hands-on course: write a spec, prove your evals can fail, then hand-build an AI agent pipeline in Python with the raw Anthropic API. Runs offline.">
+<meta name="author" content="Kawi Xiao">
+<link rel="canonical" href="https://kawi.me/lessons/spec-driven-agent-pipeline/">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kawi Xiao">
+<meta property="og:title" content="Agents that ship when the spec says so">
+<meta property="og:description" content="A free, hands-on course: write a spec, prove your evals can fail, then hand-build an AI agent pipeline in Python with the raw Anthropic API. Runs offline.">
+<meta property="og:url" content="https://kawi.me/lessons/spec-driven-agent-pipeline/">
+<meta property="og:image" content="https://kawi.me/lessons/spec-driven-agent-pipeline/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Agents that ship when the spec says so: spec, evals, harness, traces, feedback. A hands-on course.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@kawixiao">
 <!-- Google tag (gtag.js): hard-coded because this page has no front matter, so the site's
      _includes/google-analytics.html never runs here. Keep the id in sync with _config.yml. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3GB074W5ET"></script>
@@ -5561,6 +5576,7 @@ echo &quot;then see README.md for every command you can run&quot;
   const pages = [$('#start'), ...$$('.concept, .appendix')];
   const sections = [hero, ...pages, ...$$('.module'), ...$$('.mhead')];
   const baseTitle = document.title;
+  const shortTitle = baseTitle.split(':')[0];
   const label = p => p.id === 'start' ? 'Introduction' : (byId[p.id] ? byId[p.id].textContent : p.id);
   const pager = document.createElement('nav');
   pager.className = 'pager'; pager.setAttribute('aria-label', 'Lesson navigation');
@@ -5611,7 +5627,7 @@ echo &quot;then see README.md for every command you can run&quot;
     pager.append(hint);
     navLinks.forEach(a => a.classList.remove('active'));
     if (byId[page.id]) byId[page.id].classList.add('active');
-    document.title = page.id === 'start' ? baseTitle : `${label(page)} · ${baseTitle}`;
+    document.title = page.id === 'start' ? baseTitle : `${label(page)} · ${shortTitle}`;
     if (scroll) jump(el);
     if (focus && !el) {  // move focus so keyboard and screen-reader users start at the new lesson
       if (!page.hasAttribute('tabindex')) page.setAttribute('tabindex', '-1');
