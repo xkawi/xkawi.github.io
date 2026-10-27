@@ -114,6 +114,7 @@ main { padding: 0 clamp(1rem, 4vw, 3.25rem) 6rem; min-width: 0; }
 .phase { --phase: var(--accent); border-left: 4px solid var(--phase); padding-left: 1.25rem; margin: 1.6rem 0; }
 .phase.examples { --phase: var(--teal); }
 .phase.exercise { --phase: var(--amber); }
+.phase.next { --phase: var(--ink2); }
 .phase > h4 { margin: 0 0 .5rem; font-size: 1.1rem; font-weight: 800; color: var(--phase); }
 .phase p, .phase ul:not(.steps), .phase ol:not(.steps) { max-width: 66ch; }
 .phase h5 { font-size: 1.12rem; line-height: 1.3; margin: 2rem 0 .45rem; }
@@ -273,7 +274,7 @@ html.paged { scroll-behavior: auto; }  /* the browser's anchor scroll must not a
 <body>
 <div class="layout">
 <nav class="side" aria-label="Course contents"><details class="navd" open><summary>Contents</summary>
-<p class="brand sans">Agentic delivery, by hand</p><p class="overall" id="overall"></p><a class="mod" data-mod="m0" href="#m0"><span>0 Orientation and setup</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c0-1">0.1 Mission, map, environment</a><a class="mod" data-mod="m1" href="#m1"><span>1 The spec layer</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c1-1">1.1 Outcome-based specs</a><a class="mod" data-mod="m2" href="#m2"><span>2 Acceptance evals</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c2-1">2.1 Criteria to executable checks</a><a href="#c2-2">2.2 Test your tests</a><a class="mod" data-mod="m3" href="#m3"><span>3 The harness layer</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c3-1">3.1 Tool use and the agent loop</a><a href="#c3-2">3.2 State and control flow</a><a href="#c3-3">3.3 Planner, generator, evaluator</a><a href="#c3-4">3.4 Determinism and first run</a><a class="mod" data-mod="m4" href="#m4"><span>4 Observability</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c4-1">4.1 Traces and Langfuse</a><a class="mod" data-mod="m5" href="#m5"><span>5 Evals, round two</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c5-1">5.1 Variance and comparison</a><a href="#c5-2">5.2 LLM-as-judge</a><a class="mod" data-mod="m6" href="#m6"><span>6 Feedback loop and the app</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c6-1">6.1 Triage, fix, verify</a><a href="#c6-2">6.2 Ship a web UI</a><a class="mod" data-mod="m7" href="#m7"><span>7 Toward a framework</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c7-1">7.1 From scripts to a framework</a><a class="mod" href="#appendix-a" style="margin-top:1.2rem"><span>Appendices</span></a><a href="#appendix-a">A. Rebuild the project</a><a href="#appendix-b">B. Glossary</a><a href="#appendix-c">C. Troubleshooting</a><a href="#appendix-d">D. What was checked</a><div class="tools"><button type="button" id="theme-toggle">Dark theme</button><button type="button" id="reset-progress">Reset progress</button></div>
+<p class="brand sans">Agentic delivery, by hand</p><p class="overall" id="overall"></p><a class="mod" data-mod="m0" href="#m0"><span>0 Orientation and setup</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c0-1">0.1 Mission, map, environment</a><a class="mod" data-mod="m1" href="#m1"><span>1 The spec layer</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c1-1">1.1 Outcome-based specs</a><a class="mod" data-mod="m2" href="#m2"><span>2 Acceptance evals</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c2-1">2.1 Criteria to executable checks</a><a href="#c2-2">2.2 Test your tests</a><a class="mod" data-mod="m3" href="#m3"><span>3 The harness layer</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c3-1">3.1 Tool use and the agent loop</a><a href="#c3-2">3.2 State and control flow</a><a href="#c3-3">3.3 Planner, generator, evaluator</a><a href="#c3-4">3.4 Determinism and first run</a><a class="mod" data-mod="m4" href="#m4"><span>4 Observability</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c4-1">4.1 Traces and Langfuse</a><a class="mod" data-mod="m5" href="#m5"><span>5 Evals, round two</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c5-1">5.1 Variance and comparison</a><a href="#c5-2">5.2 LLM-as-judge</a><a class="mod" data-mod="m6" href="#m6"><span>6 Feedback loop and the app</span><span class="pct">0%</span></a><div class="bar"><i></i></div><a href="#c6-1">6.1 Triage, fix, verify</a><a href="#c6-2">6.2 Ship a web UI</a><a class="mod" href="#wrap-up" style="margin-top:1.2rem"><span>Wrap-up: making it stick</span></a><a class="mod" href="#appendix-a" style="margin-top:1.2rem"><span>Appendices</span></a><a href="#appendix-a">A. Rebuild the project</a><a href="#appendix-b">B. Glossary</a><a href="#appendix-c">C. Troubleshooting</a><a href="#appendix-d">D. What was checked</a><div class="tools"><button type="button" id="theme-toggle">Dark theme</button><button type="button" id="reset-progress">Reset progress</button></div>
 </details></nav>
 <main><div class="wrap">
 
@@ -282,9 +283,9 @@ html.paged { scroll-behavior: auto; }  /* the browser's anchor scroll must not a
 <p class="lede">A hands-on course for software engineers. Write a spec, build the eval suite, then hand-build the agent pipeline, tracing and feedback loop around it in Python with the raw Anthropic API. You finish with a working web app and a pipeline you understand line by line.</p>
 <div class="scoreboard" data-widget="hero" aria-label="Simulation of a pipeline run"></div>
 <ul class="facts">
-<li><b>8 modules, 14 concepts</b>Each one has ideas with sources, runnable examples, and a guided exercise.</li>
+<li><b>7 modules, 13 concepts</b>Each one has ideas with sources, runnable examples, and a guided exercise.</li>
 <li><b>One project throughout</b>A Task Tracker API with cursor paging, then a browser UI, built by the pipeline you write.</li>
-<li><b>About 1,100 lines you write</b>Tools, loop, state machine, planner, evaluator, tracing, reports, judge, CLI.</li>
+<li><b>About 1,000 lines you write</b>Tools, loop, state machine, planner, evaluator, tracing, reports, judge, CLI.</li>
 <li><b>Works without spending anything</b>An offline mode replays a scripted model, so you can finish the mechanics with no API key.</li>
 </ul>
 </header>
@@ -301,7 +302,6 @@ html.paged { scroll-behavior: auto; }  /* the browser's anchor scroll must not a
 <li>Traces in a local Langfuse showing every model call, tool call and score.</li>
 <li>Run records and commands to compare configurations and rank failures, plus a judge for quality problems tests cannot see.</li>
 <li>A running web app, in your browser, built by the pipeline.</li>
-<li>An installable <code>taskforge</code> command that scaffolds new projects: the seed of your own framework.</li>
 </ol>
 </section>
 
@@ -345,7 +345,7 @@ html.paged { scroll-behavior: auto; }  /* the browser's anchor scroll must not a
 <path d="M600 145 L600 180"/>
 </g></svg></figure>
 <p>And the finished project layout, with the module that introduces each file:</p>
-<figure class="code" data-lang="text"><figcaption><span class="fname">final layout</span><span class="len">17 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>taskforge/
+<figure class="code" data-lang="text"><figcaption><span class="fname">final layout</span><span class="len">16 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>taskforge/
   spec.md                        M1  the contract: 26 acceptance criteria
   evals/                         M2  hidden tests, grouped by criterion
     conftest.py  test_spec_api.py   test_spec_ui.py (M6)
@@ -356,12 +356,11 @@ html.paged { scroll-behavior: auto; }  /* the browser's anchor scroll must not a
     config.py state.py orchestrator.py   M3  the state machine
     planner.py                   M3  structured planning step
     fake_llm.py                  M3  offline stand-in for the model
-    cli.py                       M3  command line (init added in M7)
+    cli.py                       M3  command line
     tracing.py                   M4  Langfuse wrapper
     reports.py  judge.py         M5  compare runs; quality checks
   scripts/mutate.py              M2  plant bugs, check the evals notice
   taskforge.yaml                 M3  settings
-  pyproject.toml                 M7  makes `taskforge` an installable command
 </code></pre></figure></div>
 <div class="phase exercise"><h4>Exercise</h4><ol class="steps"><li class="step"><label class="chk"><input type="checkbox" data-step="m0-ex-s1"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 1 done</span></label><div class="stepbody"><p class="steptext">Create the project folder and a virtual environment (an isolated Python install, so this project's packages do not touch the rest of your machine).</p><figure class="code" data-lang="bash"><figcaption><span class="fname lang">bash</span><span class="len">3 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>mkdir<span class="t-w"> </span>taskforge<span class="t-w"> </span><span class="t-o">&amp;&amp;</span><span class="t-w"> </span><span class="t-nb">cd</span><span class="t-w"> </span>taskforge
 python3<span class="t-w"> </span>-m<span class="t-w"> </span>venv<span class="t-w"> </span>.venv
@@ -2967,219 +2966,54 @@ rm<span class="t-w"> </span>-f<span class="t-w"> </span>/tmp/tasks.db
 <span class="t-nv">TASKS_DB</span><span class="t-o">=</span>/tmp/tasks.db<span class="t-w"> </span>uvicorn<span class="t-w"> </span>app.main:app<span class="t-w"> </span>--port<span class="t-w"> </span><span class="t-m">8000</span>
 <span class="t-c1"># then open http://127.0.0.1:8000/</span>
 </code></pre></figure><div class="callout tip"><strong>Tip.</strong> Things to try: add a few tasks; mark one done and watch the filter radios (All, Open, Done); add more than ten tasks to make the <em>Load more</em> button appear, then click it (that is <code>nextCursor</code> at work); delete a task; reload the page and confirm the data persisted in SQLite. An agent-written UI will look different from the reference but must satisfy the same criteria.</div></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c6-2-ex-s6"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 6 done</span></label><div class="stepbody"><p class="steptext"><strong>See what AC-UI-5 protects.</strong> In the running app, add a task titled <code>&lt;b&gt;bold&lt;/b&gt;</code>. It should appear literally, tags and all. Now stop the server, and in the project's <code>app/main.py</code> change <code>title.textContent = task.title</code> to <code>title.innerHTML = task.title</code> (or the agent's equivalent). Restart and look at the same task, then try <code>&lt;img src=x onerror=alert(1)&gt;</code>. This is harmless on your own machine and shows exactly why the criterion exists. Then, from the <code>taskforge/</code> root, run <code>python -m harness eval --workspace runs/&lt;your-run-id&gt;/workspace</code> to see AC-UI-5 turn red, and revert.</p></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c6-2-ex-s7"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 7 done</span></label><div class="stepbody"><p class="steptext"><strong>Where the proxies run out.</strong> Write down one behavior of the UI that none of the five UI criteria can detect (for example: clicking <em>Done</em> actually toggles the task). Draft the acceptance criterion for it, and describe what a browser-driven test would assert. That is your first v1.2 criterion.</p></div></li></ol><div class="checkpoint"><h5>Checkpoint</h5><div class="quiz" data-quiz="{&quot;id&quot;: &quot;c6-2-q1&quot;, &quot;q&quot;: &quot;You add UI criteria and regenerate the whole project from the new spec. The UI criteria pass but two old API criteria now fail. What happened, and what does it show?&quot;, &quot;options&quot;: [&quot;The UI criteria are wrong&quot;, &quot;A regression: regenerating from a changed spec can break behavior that used to work, and the pass-to-pass criteria exist to catch exactly that&quot;, &quot;The old criteria are obsolete&quot;, &quot;Nothing: new features always break old ones&quot;], &quot;a&quot;: 1, &quot;why&quot;: &quot;Regeneration is only safe with a regression suite. The old criteria told you something broke even though the new feature worked.&quot;}"></div><div class="quiz" data-quiz="{&quot;id&quot;: &quot;c6-2-q2&quot;, &quot;q&quot;: &quot;AC-UI-5 checks that the page source never contains innerHTML. Which statement is accurate?&quot;, &quot;options&quot;: [&quot;It proves the app is free of XSS&quot;, &quot;It is a proxy: it encodes a safe practice mechanically, but a page can avoid innerHTML and still be unsafe&quot;, &quot;It is unnecessary because browsers sanitize automatically&quot;, &quot;It checks that titles are short&quot;], &quot;a&quot;: 1, &quot;why&quot;: &quot;Static checks catch a common unsafe pattern; they do not prove security. Treat them as a floor, and add behavioral tests for more.&quot;}"></div></div></div>
-</section></section><section class="module" id="m7" data-module="m7">
-<header class="mhead"><p class="mnum">Module 7</p><h2>Capstone: toward a framework</h2><p class="mintro">Separate what is the same for every project from what is not, and package the result so that someone else can run it with a spec and a config file.</p></header>
-<div class="prereq"><h4>Before you start</h4><p>Small module, but it changes how you run everything. Make sure you can undo it.</p><ol class="steps"><li class="step"><label class="chk"><input type="checkbox" data-step="m7-pre-s1"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 1 done</span></label><div class="stepbody"><p class="steptext">Modules 0 to 6 are done and the project is committed to git. This module changes packaging and the command line, so a clean working tree makes it easy to inspect (or undo) what you did.</p></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="m7-pre-s2"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 2 done</span></label><div class="stepbody"><p class="steptext">Check that setuptools-based installs work in your environment: <code>pip --version</code> should run inside your virtual environment. You will run <code>pip install -e .</code>, an <em>editable install</em>, which links the package to your source directory so edits take effect immediately.</p></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="m7-pre-s3"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 3 done</span></label><div class="stepbody"><p class="steptext"><strong>Offline mode is enough</strong> for every step here. The new command <code>taskforge</code> works with <code>--offline</code> in a freshly scaffolded project, with no key and no Docker.</p></div></li></ol></div><section class="concept" id="c7-1" data-concept="c7-1">
-<header class="chead"><h3><span class="num">7.1</span> From scripts to an installable framework</h3><p class="meta">Plan on 60 to 90 minutes, plus as long as you like on your own spec.</p></header>
-<div class="phase learn"><h4>Learn</h4>
-<p>You have a pipeline that works for one project. A <em>framework</em> is what remains when you separate what is the same for every project from what is not. Doing that separation on real code, rather than in the abstract, is the point of this module.</p>
-<h5>What was already generic</h5>
-<ul>
-<li>The <strong>state machine</strong> (plan, generate, evaluate, decide), the budgets, and the stuck detector know nothing about task trackers.</li>
-<li>The <strong>evaluator</strong> works for any project where tests follow two conventions: test names carry criterion IDs, and a <code>--workspace</code> option points the suite at the code under test. It consumes standard JUnit XML, and nearly every language ecosystem has a way to emit JUnit XML, so the same idea extends beyond Python.</li>
-<li>The <strong>tools</strong>, <strong>tracing</strong> wrapper, <strong>run records</strong>, <strong>compare</strong> and <strong>triage</strong> are project-agnostic.</li>
-</ul>
-<h5>What was project-specific, and where it now lives</h5>
-<ul>
-<li>The spec and the evals: per project, in <code>spec.md</code> and <code>evals/</code>.</li>
-<li>Model and budget choices: <code>taskforge.yaml</code>.</li>
-<li>Know-how about the stack (for example "FastAPI returns 422 by default"): <code>prompt_extra</code> in the config rather than a constant in code. That one setting is what stopped the generator prompt from being tied to FastAPI.</li>
-</ul>
-<h5>Packaging: making it a command</h5>
-<p>A <code>pyproject.toml</code> with a <code>[project.scripts]</code> entry declares a console command: <code>taskforge = "harness.cli:main"</code> means "installing this package creates a <code>taskforge</code> executable that calls <code>main()</code>". An <em>editable install</em> (<code>pip install -e .</code>) is how you develop it. Files that are not Python modules, like the scaffold templates, must be declared as package data to be installed with the package.</p>
-<h5>Scaffolding: <code>taskforge init</code></h5>
-<p>The fastest way to make a framework usable is a command that creates a working starter project: a spec with one criterion, an eval for it, a reference app that passes, and a config. The user can run <code>taskforge run --offline</code> within a minute and see the whole loop before writing anything. The offline fake replays the scaffold's <code>reference/</code> app, which is why the scaffold ships one.</p>
-<h5>Design judgments to make before you generalize further</h5>
-<ul>
-<li><strong>Who writes the evals?</strong> In this course, a human did. Having a model generate them from the spec is tempting, but a model drafting tests inherits the same misunderstandings as the model writing the code. If you do it, treat generated evals as drafts and validate them the way you did in 2.2: an oracle must pass and planted bugs must fail.</li>
-<li><strong>Adopt versus build.</strong> Orchestration, tracing, spec scaffolding and eval harnesses already exist as maintained tools. A framework is most valuable when it <em>integrates</em> them with sensible defaults, not when it reimplements each. Build the seams.</li>
-<li><strong>Isolation.</strong> A tool that runs model-written shell commands should run them in a container by default. This is the first thing to add before anyone else uses it.</li>
-<li><strong>Cost controls.</strong> Per-run and per-session token budgets, enforced, not just recorded.</li>
-<li><strong>Local-first.</strong> Running Langfuse from a Docker Compose file keeps traces on the user's machine, which matters because traces contain their source code.</li>
-</ul>
-<aside class="refs"><h5>Sources and further reading</h5><ul><li><a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/" target="_blank" rel="noopener">Python Packaging User Guide: writing pyproject.toml</a> <span class="why">Project metadata, dependencies, and <code>[project.scripts]</code> entry points.</span></li><li><a href="https://docs.langchain.com/oss/python/langgraph/graph-api" target="_blank" rel="noopener">LangGraph: Graph API overview</a><span class="ver" title="Link located by search while this course was written (Oct 14, 2026)">checked</span> <span class="why">What you would adopt instead of the hand-built state machine if you needed persistence and visualization.</span></li><li><a href="https://github.com/github/spec-kit" target="_blank" rel="noopener">GitHub Spec Kit</a><span class="ver" title="Link located by search while this course was written (Oct 14, 2026)">checked</span> <span class="why">An existing scaffold for spec-driven workflows; compare its <code>init</code> with yours.</span></li><li><a href="https://inspect.aisi.org.uk" target="_blank" rel="noopener">Inspect (UK AI Security Institute)</a> <span class="why">An open-source framework for building and running LLM evals; a candidate to adopt for the evaluation layer.</span></li><li><a href="https://langfuse.com/self-hosting" target="_blank" rel="noopener">Langfuse: self-hosting</a><span class="ver" title="Link located by search while this course was written (Oct 14, 2026)">checked</span> <span class="why">Deployment options, including local Docker Compose.</span></li></ul></aside></div>
-<div class="phase examples"><h4>Examples</h4>
-<p>The scaffold gives a new user this directory, and every file in it is something this course taught you to write:</p>
-<figure class="code" data-lang="text"><figcaption><span class="fname">what `taskforge init demo-app` creates</span><span class="len">7 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>demo-app/
-  spec.md                 one acceptance criterion: GET /health
-  taskforge.yaml          models, limits, prompt_extra
-  evals/
-    conftest.py           the client fixture and --workspace option
-    test_spec.py          test_ac_health_1_returns_ok
-  reference/app/main.py   a one-endpoint oracle
-</code></pre></figure>
-<p>And the build-versus-adopt view of the pieces, as a starting point for your own design (a judgment, not a rule):</p>
-<table><thead><tr><th>Piece</th><th>This course</th><th>Consider adopting</th><th>Why you might still build</th></tr></thead><tbody>
-<tr><td>Spec scaffolding</td><td><code>spec.md</code> with AC ids</td><td>Spec Kit</td><td>You want ids that the evaluator enforces end to end</td></tr>
-<tr><td>Orchestration</td><td>State machine, about 150 lines</td><td>LangGraph</td><td>You do not need persistence or graphs yet</td></tr>
-<tr><td>Tracing</td><td>Thin Langfuse wrapper</td><td>Langfuse directly, or OpenTelemetry</td><td>The wrapper is what keeps you portable</td></tr>
-<tr><td>Eval harness</td><td>pytest plus JUnit parsing</td><td>Inspect, or other eval frameworks</td><td>Your tests already exist as ordinary test suites</td></tr>
-<tr><td>Isolation</td><td>Cwd confinement only</td><td>Containers</td><td>Do not build this; use containers</td></tr>
+</section></section><section class="concept wrapup" id="wrap-up" data-concept="wrap-up">
+<header class="chead"><h3>Wrap-up: making it stick</h3><p class="meta">About 10 minutes. Nothing to install and no steps to tick off.</p></header>
+<div class="phase learn"><h4>Look back</h4>
+<p>In 0.1 you saw five layers in dependency order. You have now built every one of them by hand. Here is the same map again, with what you built and the one idea worth keeping from each.</p>
+<table><thead><tr><th>Layer</th><th>What you built</th><th>The idea to keep</th></tr></thead><tbody>
+<tr><td>Spec (1)</td><td><code>spec.md</code>: 31 acceptance criteria with stable IDs, and a testability contract</td><td>&quot;Done&quot; is a list of outcomes someone can observe, decided before any code is written.</td></tr>
+<tr><td>Evals (2, 5)</td><td>Black-box tests named after the criteria, an oracle that passes them, planted bugs that fail them, and a calibrated judge</td><td>A check you have never seen fail proves nothing.</td></tr>
+<tr><td>Harness (3)</td><td>Tools, the raw agent loop, an explicit state machine with separate planner, generator and evaluator, and budgets</td><td>The agent never decides that it is done. The evaluator does, with checks the generator cannot see.</td></tr>
+<tr><td>Observability (4)</td><td>Langfuse traces of every model call, tool call and score</td><td>When a run fails, find the step that went wrong before you change anything.</td></tr>
+<tr><td>Feedback (6)</td><td>Run records, <code>compare</code> and <code>triage</code>, and a web UI shipped under regression evals</td><td>One run is an anecdote. Change one thing, run it several times, keep what the evidence supports.</td></tr>
 </tbody></table>
+<p>The course opened with a promise: by the end you would know exactly why you believe the app works. Here is the answer. You believe it because 31 criteria pass, checked by tests you have watched fail, and graded by something other than the agent that wrote the code. Not because the agent said so.</p>
 </div>
-<div class="phase exercise"><h4>Exercise</h4><ol class="steps"><li class="step"><label class="chk"><input type="checkbox" data-step="c7-1-ex-s1"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 1 done</span></label><div class="stepbody"><p class="steptext">Create <code>pyproject.toml</code>, which turns the project into an installable package with a <code>taskforge</code> command.</p><figure class="code" data-lang="toml"><figcaption><span class="fname">pyproject.toml</span><span class="len">27 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code><span class="t-k">[build-system]</span>
-<span class="t-n">requires</span><span class="t-w"> </span><span class="t-o">=</span><span class="t-w"> </span><span class="t-p">[</span><span class="t-s2">&quot;setuptools&gt;=68&quot;</span><span class="t-p">]</span>
-<span class="t-n">build-backend</span><span class="t-w"> </span><span class="t-o">=</span><span class="t-w"> </span><span class="t-s2">&quot;setuptools.build_meta&quot;</span>
-
-<span class="t-k">[project]</span>
-<span class="t-n">name</span><span class="t-w"> </span><span class="t-o">=</span><span class="t-w"> </span><span class="t-s2">&quot;taskforge&quot;</span>
-<span class="t-n">version</span><span class="t-w"> </span><span class="t-o">=</span><span class="t-w"> </span><span class="t-s2">&quot;0.1.0&quot;</span>
-<span class="t-n">description</span><span class="t-w"> </span><span class="t-o">=</span><span class="t-w"> </span><span class="t-s2">&quot;Spec-driven, eval-gated agent pipeline&quot;</span>
-<span class="t-n">requires-python</span><span class="t-w"> </span><span class="t-o">=</span><span class="t-w"> </span><span class="t-s2">&quot;&gt;=3.11&quot;</span>
-<span class="t-n">dependencies</span><span class="t-w"> </span><span class="t-o">=</span><span class="t-w"> </span><span class="t-p">[</span>
-<span class="t-w">  </span><span class="t-s2">&quot;anthropic&gt;=1.0&quot;</span><span class="t-p">,</span>
-<span class="t-w">  </span><span class="t-s2">&quot;fastapi&gt;=0.110&quot;</span><span class="t-p">,</span>
-<span class="t-w">  </span><span class="t-s2">&quot;uvicorn&gt;=0.29&quot;</span><span class="t-p">,</span>
-<span class="t-w">  </span><span class="t-s2">&quot;httpx&gt;=0.27&quot;</span><span class="t-p">,</span>
-<span class="t-w">  </span><span class="t-s2">&quot;pytest&gt;=8&quot;</span><span class="t-p">,</span>
-<span class="t-w">  </span><span class="t-s2">&quot;pyyaml&gt;=6&quot;</span><span class="t-p">,</span>
-<span class="t-w">  </span><span class="t-s2">&quot;langfuse&gt;=4,&lt;5&quot;</span><span class="t-p">,</span>
-<span class="t-p">]</span>
-
-<span class="t-k">[project.scripts]</span>
-<span class="t-n">taskforge</span><span class="t-w"> </span><span class="t-o">=</span><span class="t-w"> </span><span class="t-s2">&quot;harness.cli:main&quot;</span>
-
-<span class="t-k">[tool.setuptools]</span>
-<span class="t-n">packages</span><span class="t-w"> </span><span class="t-o">=</span><span class="t-w"> </span><span class="t-p">[</span><span class="t-s2">&quot;harness&quot;</span><span class="t-p">]</span>
-
-<span class="t-k">[tool.setuptools.package-data]</span>
-<span class="t-n">harness</span><span class="t-w"> </span><span class="t-o">=</span><span class="t-w"> </span><span class="t-p">[</span><span class="t-s2">&quot;templates/*&quot;</span><span class="t-p">]</span>
-</code></pre></figure><details class="bg" open><summary>Background for this code</summary><dl><dt><code>[build-system]</code></dt><dd>Tells installers how to build the package. <code>setuptools</code> is the long-standing default backend.</dd><dt><code>[project.scripts]</code></dt><dd>Declares console commands. Installation generates an executable named <code>taskforge</code> that imports <code>harness.cli</code> and calls <code>main()</code>, passing its return value to <code>sys.exit</code> (which is why our commands return exit codes).</dd><dt><code>[tool.setuptools.package-data]</code></dt><dd>Non-Python files are not included unless declared. This line is what ships <code>harness/templates/*</code> with an installed copy.</dd><dt>Editable install</dt><dd><code>pip install -e .</code> installs a link to your working directory instead of a copy, so changing code takes effect without reinstalling. Standard for developing a package.</dd></dl></details></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c7-1-ex-s2"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 2 done</span></label><div class="stepbody"><p class="steptext">Create the scaffold templates. Five small files under <code>harness/templates/</code>. Four are short, and <code>conftest.py</code> is identical to the one you already wrote, so copy it.</p><figure class="code" data-lang="bash"><figcaption><span class="fname lang">bash</span><span class="len">2 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>mkdir<span class="t-w"> </span>-p<span class="t-w"> </span>harness/templates
-cp<span class="t-w"> </span>evals/conftest.py<span class="t-w"> </span>harness/templates/conftest.py
-</code></pre></figure><details class="fold"><summary>Show harness/templates/spec.md</summary><figure class="code" data-lang="markdown"><figcaption><span class="fname">harness/templates/spec.md</span><span class="len">13 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code><span class="t-gh"># My Project — Spec v1</span>
-
-This document is the single source of truth. Every <span class="t-sb">`AC-*`</span> line is an acceptance criterion that an
-automated eval checks. Write outcomes (what a user or caller can observe), not implementation steps.
-
-<span class="t-gu">## Project constraints (the testability contract)</span>
-
-<span class="t-k">-</span><span class="t-w"> </span>PC-1: Python 3.11+ and FastAPI. The ASGI app object is named <span class="t-sb">`app`</span> and lives in <span class="t-sb">`app/main.py`</span>.
-<span class="t-k">-</span><span class="t-w"> </span>PC-2: Third-party dependencies are limited to <span class="t-sb">`fastapi`</span> and <span class="t-sb">`uvicorn`</span>.
-
-<span class="t-gu">## Health check</span>
-
-<span class="t-k">-</span><span class="t-w"> </span><span class="t-gs">**AC-HEALTH-1**</span> <span class="t-sb">`GET /health`</span> returns <span class="t-sb">`200`</span> and the JSON body <span class="t-sb">`{&quot;status&quot;: &quot;ok&quot;}`</span>.
-</code></pre></figure></details><details class="fold"><summary>Show harness/templates/test_spec.py</summary><figure class="code" data-lang="python"><figcaption><span class="fname">harness/templates/test_spec.py</span><span class="len">7 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code><span class="t-sd">&quot;&quot;&quot;Acceptance evals for spec.md. Name each test test_ac_&lt;area&gt;_&lt;n&gt;_&lt;what&gt; so it maps to AC-&lt;AREA&gt;-&lt;n&gt;.&quot;&quot;&quot;</span>
-
-
-<span class="t-k">def</span><span class="t-w"> </span><span class="t-nf">test_ac_health_1_returns_ok</span><span class="t-p">(</span><span class="t-n">client</span><span class="t-p">):</span>
-    <span class="t-n">response</span> <span class="t-o">=</span> <span class="t-n">client</span><span class="t-o">.</span><span class="t-n">get</span><span class="t-p">(</span><span class="t-s2">&quot;/health&quot;</span><span class="t-p">)</span>
-    <span class="t-k">assert</span> <span class="t-n">response</span><span class="t-o">.</span><span class="t-n">status_code</span> <span class="t-o">==</span> <span class="t-mi">200</span>
-    <span class="t-k">assert</span> <span class="t-n">response</span><span class="t-o">.</span><span class="t-n">json</span><span class="t-p">()</span> <span class="t-o">==</span> <span class="t-p">{</span><span class="t-s2">&quot;status&quot;</span><span class="t-p">:</span> <span class="t-s2">&quot;ok&quot;</span><span class="t-p">}</span>
-</code></pre></figure></details><details class="fold"><summary>Show harness/templates/reference_main.py</summary><figure class="code" data-lang="python"><figcaption><span class="fname">harness/templates/reference_main.py</span><span class="len">9 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code><span class="t-sd">&quot;&quot;&quot;Reference implementation used to validate the evals (and by `--offline` runs). The agent never sees it.&quot;&quot;&quot;</span>
-<span class="t-kn">from</span><span class="t-w"> </span><span class="t-nn">fastapi</span><span class="t-w"> </span><span class="t-kn">import</span> <span class="t-n">FastAPI</span>
-
-<span class="t-n">app</span> <span class="t-o">=</span> <span class="t-n">FastAPI</span><span class="t-p">()</span>
-
-
-<span class="t-nd">@app</span><span class="t-o">.</span><span class="t-n">get</span><span class="t-p">(</span><span class="t-s2">&quot;/health&quot;</span><span class="t-p">)</span>
-<span class="t-k">async</span> <span class="t-k">def</span><span class="t-w"> </span><span class="t-nf">health</span><span class="t-p">():</span>
-    <span class="t-k">return</span> <span class="t-p">{</span><span class="t-s2">&quot;status&quot;</span><span class="t-p">:</span> <span class="t-s2">&quot;ok&quot;</span><span class="t-p">}</span>
-</code></pre></figure></details><details class="fold"><summary>Show harness/templates/taskforge.yaml</summary><figure class="code" data-lang="yaml"><figcaption><span class="fname">harness/templates/taskforge.yaml</span><span class="len">20 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code><span class="t-c1"># Settings for `taskforge run`. Anything you leave out keeps its default (see harness/config.py).</span>
-<span class="t-nt">models</span><span class="t-p">:</span>
-<span class="t-w">  </span><span class="t-nt">planner</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-l t-l-Scalar t-l-Scalar-Plain">claude-sonnet-5-5</span>
-<span class="t-w">  </span><span class="t-nt">generator</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-l t-l-Scalar t-l-Scalar-Plain">claude-sonnet-5-5</span>
-<span class="t-w">  </span><span class="t-nt">judge</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-l t-l-Scalar t-l-Scalar-Plain">claude-haiku-5-5</span>
-
-<span class="t-nt">limits</span><span class="t-p">:</span>
-<span class="t-w">  </span><span class="t-nt">max_attempts</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-l t-l-Scalar t-l-Scalar-Plain">4</span>
-<span class="t-w">  </span><span class="t-nt">max_turns</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-l t-l-Scalar t-l-Scalar-Plain">20</span>
-<span class="t-w">  </span><span class="t-nt">max_tokens</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-l t-l-Scalar t-l-Scalar-Plain">8192</span>
-<span class="t-w">  </span><span class="t-nt">stuck_limit</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-l t-l-Scalar t-l-Scalar-Plain">2</span>
-<span class="t-w">  </span><span class="t-nt">command_timeout</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-l t-l-Scalar t-l-Scalar-Plain">30</span>
-
-<span class="t-nt">use_planner</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-l t-l-Scalar t-l-Scalar-Plain">true</span>
-<span class="t-nt">temperature</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-l t-l-Scalar t-l-Scalar-Plain">null</span>
-<span class="t-nt">evals_dir</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-l t-l-Scalar t-l-Scalar-Plain">evals</span>
-
-<span class="t-c1"># Hints appended to the generator&#39;s system prompt. Put project-specific know-how here.</span>
-<span class="t-nt">prompt_extra</span><span class="t-p">:</span><span class="t-w"> </span><span class="t-p t-p-Indicator">|</span>
-<span class="t-w">  </span><span class="t-no">Hint: with FastAPI you can test your own work in a throwaway script using fastapi.testclient.TestClient.</span>
-</code></pre></figure></details></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c7-1-ex-s3"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 3 done</span></label><div class="stepbody"><p class="steptext">Add the <code>init</code> command. The change to <code>cli.py</code> is one new function and three lines in <code>main</code>.</p><figure class="code diff" data-lang="diff"><figcaption><span class="fname">harness/cli.py (what changes)</span><span class="len">+26 lines</span></figcaption><pre><code><span class="d-h">@@ -90,4 +90,27 @@</span>
-<span class="d-c"> </span>
-<span class="d-c"> </span>
-<span class="d-a">+def cmd_init(args) -&gt; int:</span>
-<span class="d-a">+    from importlib.resources import files</span>
-<span class="d-a">+</span>
-<span class="d-a">+    templates = files(&quot;harness&quot;) / &quot;templates&quot;</span>
-<span class="d-a">+    target = Path(args.directory)</span>
-<span class="d-a">+    layout = {</span>
-<span class="d-a">+        &quot;spec.md&quot;: &quot;spec.md&quot;,</span>
-<span class="d-a">+        &quot;taskforge.yaml&quot;: &quot;taskforge.yaml&quot;,</span>
-<span class="d-a">+        &quot;conftest.py&quot;: &quot;evals/conftest.py&quot;,</span>
-<span class="d-a">+        &quot;test_spec.py&quot;: &quot;evals/test_spec.py&quot;,</span>
-<span class="d-a">+        &quot;reference_main.py&quot;: &quot;reference/app/main.py&quot;,</span>
-<span class="d-a">+    }</span>
-<span class="d-a">+    for source, destination in layout.items():</span>
-<span class="d-a">+        path = target / destination</span>
-<span class="d-a">+        if path.exists():</span>
-<span class="d-a">+            print(f&quot;skip   {destination} (already exists)&quot;)</span>
-<span class="d-a">+            continue</span>
-<span class="d-a">+        path.parent.mkdir(parents=True, exist_ok=True)</span>
-<span class="d-a">+        path.write_text((templates / source).read_text(encoding=&quot;utf-8&quot;), encoding=&quot;utf-8&quot;)</span>
-<span class="d-a">+        print(f&quot;create {destination}&quot;)</span>
-<span class="d-a">+    (target / &quot;reference/app/__init__.py&quot;).touch()</span>
-<span class="d-a">+    print(f&quot;\nNext: cd {target} &amp;&amp; taskforge run --offline   (then edit spec.md and the evals)&quot;)</span>
-<span class="d-a">+    return 0</span>
-<span class="d-c"> </span>
-<span class="d-c"> </span>
-<span class="d-h">@@ -130,4 +153,7 @@</span>
-<span class="d-c">     jd.set_defaults(func=cmd_judge)</span>
-<span class="d-c"> </span>
-<span class="d-a">+    init = sub.add_parser(&quot;init&quot;, help=&quot;scaffold a new project (spec, evals, config) in a directory&quot;)</span>
-<span class="d-a">+    init.add_argument(&quot;directory&quot;)</span>
-<span class="d-a">+    init.set_defaults(func=cmd_init)</span>
-<span class="d-c"> </span>
-<span class="d-c">     args = parser.parse_args(argv)</span></code></pre></figure><details class="bg" open><summary>Background for this code</summary><dl><dt><code>importlib.resources.files</code></dt><dd>The supported way to read data files that ship inside a Python package, working whether the package is installed normally, as a zip, or editable. Better than building paths from <code>__file__</code>.</dd><dt>Skip existing files</dt><dd><code>init</code> never overwrites. Running it twice, or in a directory that already has a <code>spec.md</code>, is safe. Scaffolding tools should be idempotent for the same reason.</dd></dl></details></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c7-1-ex-s4"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 4 done</span></label><div class="stepbody"><p class="steptext">Install it and try the command.</p><figure class="code" data-lang="bash"><figcaption><span class="fname lang">bash</span><span class="len">2 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>pip<span class="t-w"> </span>install<span class="t-w"> </span>-e<span class="t-w"> </span>.
-taskforge<span class="t-w"> </span>--help
-</code></pre></figure><figure class="code out"><figcaption><span class="fname lang">Expected output (formatting may vary slightly by Python version)</span></figcaption><pre><code>usage: taskforge [-h] {run,eval,compare,triage,judge,init} ...
-
-positional arguments:
-  {run,eval,compare,triage,judge,init}
-    run                 build the spec with the agent pipeline
-    eval                run the acceptance evals against a project directory
-    compare             compare two groups of runs by tag
-    triage              rank failing criteria across runs
-    judge               static checks + LLM judge on a project directory
-    init                scaffold a new project (spec, evals, config) in a
-                        directory
-
-options:
-  -h, --help            show this help message and exit</code></pre></figure></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c7-1-ex-s5"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 5 done</span></label><div class="stepbody"><p class="steptext"><strong>Use it on a brand-new project, from outside this one.</strong> In a different directory, scaffold, run offline, and evaluate. This is the moment of truth: nothing from your task-tracker work is reachable except through the installed command.</p><figure class="code" data-lang="bash"><figcaption><span class="fname lang">bash</span><span class="len">5 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code><span class="t-nb">cd</span><span class="t-w"> </span>/tmp
-taskforge<span class="t-w"> </span>init<span class="t-w"> </span>demo-app
-<span class="t-nb">cd</span><span class="t-w"> </span>demo-app
-taskforge<span class="t-w"> </span>run<span class="t-w"> </span>--offline
-taskforge<span class="t-w"> </span><span class="t-nb">eval</span><span class="t-w"> </span>--workspace<span class="t-w"> </span>reference
-</code></pre></figure><figure class="code out"><figcaption><span class="fname lang">Expected output (the run id will differ)</span></figcaption><pre><code>create spec.md
-create taskforge.yaml
-create evals/conftest.py
-create evals/test_spec.py
-create reference/app/main.py
-
-Next: cd demo-app &amp;&amp; taskforge run --offline   (then edit spec.md and the evals)
-[trial 1/1] 20261014-092859-run-16ec: PASSED  outcome match 1/1  attempts=1
-  project: runs/20261014-092859-run-16ec/workspace
-Acceptance results: 1/1 criteria pass.
-Passing (do not break): AC-HEALTH-1</code></pre></figure></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c7-1-ex-s6"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 6 done</span></label><div class="stepbody"><p class="steptext"><strong>Aim it at something different.</strong> In <code>demo-app</code>, replace the health-check spec with a small service of your own (a URL shortener, a notes API, a unit-conversion endpoint). Write 3 to 6 criteria with IDs, the matching tests, and a reference implementation, and check your oracle with <code>taskforge eval --workspace reference</code> and a planted bug. Then run it live: <code>taskforge run --tag first</code>. Everything you learned in Modules 1, 2 and 5 applies unchanged; if something does not generalize, note what.</p></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c7-1-ex-s7"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 7 done</span></label><div class="stepbody"><p class="steptext"><strong>Write the design memo.</strong> Create <code>DESIGN.md</code> and answer: (1) Which parts of the pipeline are still tied to Python, pytest, FastAPI or Anthropic's API? (2) What is the smallest abstraction that would remove the most coupling (the sketch below is a candidate), and what would you change in the orchestrator to use it? (3) What would you ship first for someone who has never seen this course: isolation, cost caps, an experiment runner, or something else, and why? Keep it to one page.</p><figure class="code" data-lang="python"><figcaption><span class="fname">design sketch</span><span class="len">14 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code><span class="t-c1"># SKETCH - a design idea to react to, not part of the tested project.</span>
-<span class="t-kn">from</span><span class="t-w"> </span><span class="t-nn">pathlib</span><span class="t-w"> </span><span class="t-kn">import</span> <span class="t-n">Path</span>
-<span class="t-kn">from</span><span class="t-w"> </span><span class="t-nn">typing</span><span class="t-w"> </span><span class="t-kn">import</span> <span class="t-n">Protocol</span>
-
-<span class="t-kn">from</span><span class="t-w"> </span><span class="t-nn">harness.evaluator</span><span class="t-w"> </span><span class="t-kn">import</span> <span class="t-n">EvalReport</span>
-
-
-<span class="t-k">class</span><span class="t-w"> </span><span class="t-nc">Evaluator</span><span class="t-p">(</span><span class="t-n">Protocol</span><span class="t-p">):</span>
-<span class="t-w">    </span><span class="t-sd">&quot;&quot;&quot;Anything that can grade a project directory against a spec and report per-criterion results.&quot;&quot;&quot;</span>
-
-    <span class="t-k">def</span><span class="t-w"> </span><span class="t-nf">run</span><span class="t-p">(</span><span class="t-bp">self</span><span class="t-p">,</span> <span class="t-n">workspace</span><span class="t-p">:</span> <span class="t-n">Path</span><span class="t-p">,</span> <span class="t-n">spec_text</span><span class="t-p">:</span> <span class="t-nb">str</span><span class="t-p">)</span> <span class="t-o">-&gt;</span> <span class="t-n">EvalReport</span><span class="t-p">:</span> <span class="t-o">...</span>
-
-<span class="t-c1"># Today evaluate_node calls run_evals(...) directly. An Evaluator protocol lets a config key</span>
-<span class="t-c1"># choose pytest, a JUnit-XML command for another language, or a model-based grader.</span>
-</code></pre></figure></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c7-1-ex-s8"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 8 done</span></label><div class="stepbody"><p class="steptext">Commit, tag, and write a short retrospective in <code>NOTES.md</code>: what you built, which module taught you the most, and the first experiment you want to run with this pipeline on a real spec of yours.</p><figure class="code" data-lang="bash"><figcaption><span class="fname lang">bash</span><span class="len">1 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>git<span class="t-w"> </span>add<span class="t-w"> </span>-A<span class="t-w"> </span><span class="t-o">&amp;&amp;</span><span class="t-w"> </span>git<span class="t-w"> </span>commit<span class="t-w"> </span>-qm<span class="t-w"> </span><span class="t-s2">&quot;taskforge: installable CLI with init&quot;</span><span class="t-w"> </span><span class="t-o">&amp;&amp;</span><span class="t-w"> </span>git<span class="t-w"> </span>tag<span class="t-w"> </span>v0.1
-</code></pre></figure></div></li></ol><div class="checkpoint"><h5>Checkpoint</h5><div class="quiz" data-quiz="{&quot;id&quot;: &quot;c7-1-q1&quot;, &quot;q&quot;: &quot;Why does the evaluator generalize to other languages more easily than the rest of the project?&quot;, &quot;options&quot;: [&quot;It uses Python-only features that others copy&quot;, &quot;It depends only on two conventions (criterion ids in test names, a way to point the suite at the code) and a standard report format, JUnit XML, that many ecosystems can emit&quot;, &quot;It does not actually run tests&quot;, &quot;It is written in a language-agnostic syntax&quot;], &quot;a&quot;: 1, &quot;why&quot;: &quot;The evaluator never looks inside the code under test; it launches a test command and reads a standard report. That is a small interface that other languages can satisfy.&quot;}"></div><div class="quiz" data-quiz="{&quot;id&quot;: &quot;c7-1-q2&quot;, &quot;q&quot;: &quot;Someone proposes having the same model that writes the code also generate the acceptance evals from the spec. What is the main risk?&quot;, &quot;options&quot;: [&quot;It costs too much&quot;, &quot;Both artifacts inherit the same misreadings of the spec, so the evals may agree with the bugs; generated evals need independent validation (an oracle that passes, planted bugs that fail)&quot;, &quot;Models cannot write tests&quot;, &quot;It makes the spec unnecessary&quot;], &quot;a&quot;: 1, &quot;why&quot;: &quot;This is a design judgment rather than a measured result, but the logic follows from 3.3 and 2.2: independence between the thing being checked and the checker is what gives the check meaning.&quot;}"></div></div></div>
-</section></section>
+<div class="phase examples"><h4>Check yourself</h4>
+<p>Five questions, each mixing ideas from more than one module. Answer from memory before you look; each explanation names the lesson to revisit if you missed it.</p>
+<div class="quiz" data-quiz="{&quot;id&quot;: &quot;wrap-q1&quot;, &quot;q&quot;: &quot;A prompt change took one run from 22/26 to 26/26. What do you need before you keep the change?&quot;, &quot;options&quot;: [&quot;Nothing more: 26/26 is the outcome you wanted&quot;, &quot;Several runs of both configurations on the same spec, compared side by side, because one run cannot tell a better pipeline from a lucky one&quot;, &quot;The generator&#x27;s own explanation of why the new prompt works better&quot;, &quot;A trace of the 26/26 run showing every tool call&quot;], &quot;a&quot;: 1, &quot;why&quot;: &quot;One run of a stochastic system is an anecdote. Revisit 5.1 for trials and fair comparisons, and 6.1 for changing one thing at a time.&quot;}"></div><div class="quiz" data-quiz="{&quot;id&quot;: &quot;wrap-q2&quot;, &quot;q&quot;: &quot;You write a test for a new criterion and it passes against the reference app. What else must be true before you trust it?&quot;, &quot;options&quot;: [&quot;The agent must also pass it on its first attempt&quot;, &quot;It must run in under a second&quot;, &quot;It must fail against a copy of the app with a bug planted that violates that criterion&quot;, &quot;An LLM judge must approve it&quot;], &quot;a&quot;: 2, &quot;why&quot;: &quot;A check you have never seen fail proves nothing. The oracle shows the test is fair; the planted bug shows it can catch a violation. Revisit 2.2.&quot;}"></div><div class="quiz" data-quiz="{&quot;id&quot;: &quot;wrap-q3&quot;, &quot;q&quot;: &quot;Why does the generator never see the acceptance tests while it works?&quot;, &quot;options&quot;: [&quot;So that passing them is evidence of meeting the spec, not of having fitted the code to the tests&quot;, &quot;Because the tests are too long to fit in its context window&quot;, &quot;To make each run faster&quot;, &quot;Because models cannot read pytest files&quot;], &quot;a&quot;: 0, &quot;why&quot;: &quot;Tests the agent can see become targets it can game. Held-out tests (2.1) and a separate evaluator (3.3) keep the check independent of the thing being checked.&quot;}"></div><div class="quiz" data-quiz="{&quot;id&quot;: &quot;wrap-q4&quot;, &quot;q&quot;: &quot;AC-LIST-9 fails on every trial. What do you do first?&quot;, &quot;options&quot;: [&quot;Switch to a larger model&quot;, &quot;Raise the turn budget so the agent has more room&quot;, &quot;Loosen the test so it is less strict&quot;, &quot;Open the trace of one failing trial, find the step where it went wrong, then pick the cheapest lever that addresses it&quot;], &quot;a&quot;: 3, &quot;why&quot;: &quot;Traces (4.1) tell you which step failed; triage (6.1) tells you which lever to pull. Changing the model or the test before you know the cause is guessing.&quot;}"></div><div class="quiz" data-quiz="{&quot;id&quot;: &quot;wrap-q5&quot;, &quot;q&quot;: &quot;For one rubric item, your static check says fail and the LLM judge says pass. What should you conclude?&quot;, &quot;options&quot;: [&quot;The judge is right, because it reads the code the way a person would&quot;, &quot;Do not rely on the judge for that item until you have read the code yourself and seen how often the judge agrees with checks you trust&quot;, &quot;Static checks are always right, so remove the judge&quot;, &quot;Average the two verdicts&quot;], &quot;a&quot;: 1, &quot;why&quot;: &quot;A model-based grader is an instrument that needs calibrating before you trust it (5.2). A disagreement is a signal to look, not a vote to settle.&quot;}"></div>
+</div>
+<div class="phase exercise"><h4>Use it on your own work</h4>
+<p>The surest way to keep what you learned is to use it once on real code while it is fresh. You do not need the whole pipeline for this; the habits work with any coding agent.</p>
+<ol>
+<li><strong>Pick one small feature</strong> in a codebase you work on, something an agent could build in an afternoon.</li>
+<li><strong>Write 3 to 5 acceptance criteria</strong> with IDs, as outcomes a user or caller can observe (1.1).</li>
+<li><strong>Write one test per criterion and watch each one fail</strong>, against the current code or a planted bug (2.2).</li>
+<li><strong>Give the agent the spec, not the tests.</strong> Where you can, keep the tests where it cannot read or edit them while it works (2.1).</li>
+<li><strong>Judge the result only by the tests.</strong> If something fails, read what the agent actually did before you change the prompt or the spec (4.1, 6.1).</li>
+</ol>
+<div class="callout tip"><strong>Tip.</strong> If writing the criteria turns out to be the hard part, that is normal, and it is the point. Most of the value comes from deciding what &quot;done&quot; means before anyone, person or agent, writes code.</div>
+</div>
+<div class="phase next"><h4>What this course left out</h4>
+<p>The project was kept small so that you could build every line by hand. Before you use these ideas on something larger or shared, close these gaps:</p>
+<ul>
+<li><strong>Real isolation.</strong> Your tools keep the agent inside its workspace directory, but that is not a security boundary. Run model-written commands in a container or another sandbox before anyone else uses the pipeline (3.1).</li>
+<li><strong>Enforced spending limits.</strong> The harness budgets stop runaway loops and token usage is recorded, but a shared tool also needs hard caps that stop a run when it costs too much.</li>
+<li><strong>Evals in CI.</strong> A regression suite protects you only if it runs on every change, not just when you remember to run it (5.1, 6.2).</li>
+<li><strong>When to adopt a framework.</strong> You now know what an agent framework does underneath: a loop, state, tools and traces. Adopt one when you need what it adds, such as persistence, retries or human review steps, and read its traces with the same questions you asked of your own (3.1, 3.2).</li>
+</ul>
+<aside class="refs"><h5>Where to go next</h5><ul>
+<li><a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">Building effective agents</a> <span class="why">Worth rereading now that you have built both a workflow and an agent.</span></li>
+<li><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener">Demystifying evals for AI agents</a> <span class="why">Graders, trials and outcomes, with more patterns than this course had room for.</span></li>
+<li><a href="https://docs.langchain.com/oss/python/langgraph/graph-api" target="_blank" rel="noopener">LangGraph: Graph API overview</a> <span class="why">Compare it with your state machine from 3.2.</span></li>
+<li><a href="https://inspect.aisi.org.uk" target="_blank" rel="noopener">Inspect (UK AI Security Institute)</a> <span class="why">An open-source framework for building and running LLM evals.</span></li>
+<li><a href="https://github.com/github/spec-kit" target="_blank" rel="noopener">GitHub Spec Kit</a> <span class="why">Tooling for spec-driven development, if you want to make the spec layer a team habit.</span></li>
+</ul></aside>
+</div>
+</section>
 <section class="appendix" id="appendix-a"><h2 class="sans" style="font-size:1.8rem">A. Rebuild the finished project</h2>
-<p>If you fall behind or something is broken beyond repair, this script recreates every file of the finished project (all modules applied, including tracing, the judge, the UI evals and the <code>init</code> command) in an <em>empty</em> directory. It is also an answer key: compare your files with it when a step does not behave as described. After running it, create the virtual environment and install the requirements as in Module 0.</p>
-<details class="fold"><summary>Show the one-paste rebuild script (2299 lines)</summary><figure class="code" data-lang="text"><figcaption><span class="fname">bootstrap.sh</span><span class="len">2299 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>#!/usr/bin/env bash
+<p>If you fall behind or something is broken beyond repair, this script recreates every file of the finished project (all modules applied, including tracing, the judge and the UI evals) in an <em>empty</em> directory. It is also an answer key: compare your files with it when a step does not behave as described. After running it, create the virtual environment and install the requirements as in Module 0.</p>
+<details class="fold"><summary>Show the one-paste rebuild script (2138 lines)</summary><figure class="code" data-lang="text"><figcaption><span class="fname">bootstrap.sh</span><span class="len">2138 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>#!/usr/bin/env bash
 # Recreates the finished taskforge project (all modules applied). Run it in an EMPTY directory.
 set -euo pipefail
 
@@ -3192,36 +3026,6 @@ httpx&gt;=0.27
 pytest&gt;=8
 pyyaml&gt;=6
 langfuse&gt;=4,&lt;5
-__TF_EOF__
-mkdir -p &quot;$(dirname &#x27;pyproject.toml&#x27;)&quot;
-cat &gt; &#x27;pyproject.toml&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
-[build-system]
-requires = [&quot;setuptools&gt;=68&quot;]
-build-backend = &quot;setuptools.build_meta&quot;
-
-[project]
-name = &quot;taskforge&quot;
-version = &quot;0.1.0&quot;
-description = &quot;Spec-driven, eval-gated agent pipeline&quot;
-requires-python = &quot;&gt;=3.11&quot;
-dependencies = [
-  &quot;anthropic&gt;=1.0&quot;,
-  &quot;fastapi&gt;=0.110&quot;,
-  &quot;uvicorn&gt;=0.29&quot;,
-  &quot;httpx&gt;=0.27&quot;,
-  &quot;pytest&gt;=8&quot;,
-  &quot;pyyaml&gt;=6&quot;,
-  &quot;langfuse&gt;=4,&lt;5&quot;,
-]
-
-[project.scripts]
-taskforge = &quot;harness.cli:main&quot;
-
-[tool.setuptools]
-packages = [&quot;harness&quot;]
-
-[tool.setuptools.package-data]
-harness = [&quot;templates/*&quot;]
 __TF_EOF__
 mkdir -p &quot;$(dirname &#x27;spec.md&#x27;)&quot;
 cat &gt; &#x27;spec.md&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
@@ -4528,33 +4332,6 @@ def cmd_judge(args) -&gt; int:
     return 0
 
 
-# region init
-def cmd_init(args) -&gt; int:
-    from importlib.resources import files
-
-    templates = files(&quot;harness&quot;) / &quot;templates&quot;
-    target = Path(args.directory)
-    layout = {
-        &quot;spec.md&quot;: &quot;spec.md&quot;,
-        &quot;taskforge.yaml&quot;: &quot;taskforge.yaml&quot;,
-        &quot;conftest.py&quot;: &quot;evals/conftest.py&quot;,
-        &quot;test_spec.py&quot;: &quot;evals/test_spec.py&quot;,
-        &quot;reference_main.py&quot;: &quot;reference/app/main.py&quot;,
-    }
-    for source, destination in layout.items():
-        path = target / destination
-        if path.exists():
-            print(f&quot;skip   {destination} (already exists)&quot;)
-            continue
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text((templates / source).read_text(encoding=&quot;utf-8&quot;), encoding=&quot;utf-8&quot;)
-        print(f&quot;create {destination}&quot;)
-    (target / &quot;reference/app/__init__.py&quot;).touch()
-    print(f&quot;\nNext: cd {target} &amp;&amp; taskforge run --offline   (then edit spec.md and the evals)&quot;)
-    return 0
-# endregion init
-
-
 def main(argv=None) -&gt; int:
     parser = argparse.ArgumentParser(prog=&quot;taskforge&quot;)
     sub = parser.add_subparsers(dest=&quot;command&quot;, required=True)
@@ -4593,112 +4370,8 @@ def main(argv=None) -&gt; int:
     jd.add_argument(&quot;--offline&quot;, action=&quot;store_true&quot;)
     jd.set_defaults(func=cmd_judge)
 
-    init = sub.add_parser(&quot;init&quot;, help=&quot;scaffold a new project (spec, evals, config) in a directory&quot;)  # [M7]
-    init.add_argument(&quot;directory&quot;)  # [M7]
-    init.set_defaults(func=cmd_init)  # [M7]
-
     args = parser.parse_args(argv)
     return args.func(args)
-__TF_EOF__
-mkdir -p &quot;$(dirname &#x27;harness/templates/conftest.py&#x27;)&quot;
-cat &gt; &#x27;harness/templates/conftest.py&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
-&quot;&quot;&quot;Fixtures that run the app under test in-process, with a fresh database for every test.&quot;&quot;&quot;
-import importlib
-import sys
-from pathlib import Path
-
-import pytest
-from fastapi.testclient import TestClient
-
-
-def pytest_addoption(parser):
-    parser.addoption(
-        &quot;--workspace&quot;,
-        default=&quot;workspace&quot;,
-        help=&quot;Directory containing the project under test (it must contain app/main.py).&quot;,
-    )
-
-
-def _purge_app_modules() -&gt; None:
-    for name in [m for m in sys.modules if m == &quot;app&quot; or m.startswith(&quot;app.&quot;)]:
-        del sys.modules[name]
-
-
-@pytest.fixture
-def client(request, tmp_path, monkeypatch):
-    workspace = Path(request.config.getoption(&quot;--workspace&quot;)).resolve()
-    monkeypatch.setenv(&quot;TASKS_DB&quot;, str(tmp_path / &quot;tasks.db&quot;))
-    monkeypatch.syspath_prepend(str(workspace))
-    _purge_app_modules()
-    try:
-        module = importlib.import_module(&quot;app.main&quot;)
-    except Exception as exc:  # the project may be broken; report it as a test failure
-        pytest.fail(f&quot;cannot import app.main from {workspace}: {exc!r}&quot;)
-    # raise_server_exceptions=False turns crashes into HTTP 500s so assertions can describe them
-    with TestClient(module.app, raise_server_exceptions=False) as test_client:
-        yield test_client
-    _purge_app_modules()
-__TF_EOF__
-mkdir -p &quot;$(dirname &#x27;harness/templates/spec.md&#x27;)&quot;
-cat &gt; &#x27;harness/templates/spec.md&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
-# My Project — Spec v1
-
-This document is the single source of truth. Every `AC-*` line is an acceptance criterion that an
-automated eval checks. Write outcomes (what a user or caller can observe), not implementation steps.
-
-## Project constraints (the testability contract)
-
-- PC-1: Python 3.11+ and FastAPI. The ASGI app object is named `app` and lives in `app/main.py`.
-- PC-2: Third-party dependencies are limited to `fastapi` and `uvicorn`.
-
-## Health check
-
-- **AC-HEALTH-1** `GET /health` returns `200` and the JSON body `{&quot;status&quot;: &quot;ok&quot;}`.
-__TF_EOF__
-mkdir -p &quot;$(dirname &#x27;harness/templates/test_spec.py&#x27;)&quot;
-cat &gt; &#x27;harness/templates/test_spec.py&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
-&quot;&quot;&quot;Acceptance evals for spec.md. Name each test test_ac_&lt;area&gt;_&lt;n&gt;_&lt;what&gt; so it maps to AC-&lt;AREA&gt;-&lt;n&gt;.&quot;&quot;&quot;
-
-
-def test_ac_health_1_returns_ok(client):
-    response = client.get(&quot;/health&quot;)
-    assert response.status_code == 200
-    assert response.json() == {&quot;status&quot;: &quot;ok&quot;}
-__TF_EOF__
-mkdir -p &quot;$(dirname &#x27;harness/templates/taskforge.yaml&#x27;)&quot;
-cat &gt; &#x27;harness/templates/taskforge.yaml&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
-# Settings for `taskforge run`. Anything you leave out keeps its default (see harness/config.py).
-models:
-  planner: claude-sonnet-5-5
-  generator: claude-sonnet-5-5
-  judge: claude-haiku-5-5
-
-limits:
-  max_attempts: 4
-  max_turns: 20
-  max_tokens: 8192
-  stuck_limit: 2
-  command_timeout: 30
-
-use_planner: true
-temperature: null
-evals_dir: evals
-
-# Hints appended to the generator&#x27;s system prompt. Put project-specific know-how here.
-prompt_extra: |
-  Hint: with FastAPI you can test your own work in a throwaway script using fastapi.testclient.TestClient.
-__TF_EOF__
-mkdir -p &quot;$(dirname &#x27;harness/templates/reference_main.py&#x27;)&quot;
-cat &gt; &#x27;harness/templates/reference_main.py&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
-&quot;&quot;&quot;Reference implementation used to validate the evals (and by `--offline` runs). The agent never sees it.&quot;&quot;&quot;
-from fastapi import FastAPI
-
-app = FastAPI()
-
-
-@app.get(&quot;/health&quot;)
-async def health():
-    return {&quot;status&quot;: &quot;ok&quot;}
 __TF_EOF__
 mkdir -p &quot;$(dirname &#x27;evals/conftest.py&#x27;)&quot;
 cat &gt; &#x27;evals/conftest.py&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
@@ -5481,7 +5154,7 @@ echo &quot;done: now run: python3 -m venv .venv &amp;&amp; source .venv/bin/acti
 </code></pre></figure></details>
 </section>
 <section class="appendix" id="appendix-b"><h2 class="sans" style="font-size:1.8rem">B. Glossary</h2><dl class="glossary"><dt>Acceptance criterion</dt><dd>One checkable statement about observable behavior, with a stable ID (AC-LIST-8). The spec&#x27;s unit of &#x27;done&#x27;.</dd><dt>Agent</dt><dd>A system where an LLM decides which tools to call and when to stop. Contrast with a workflow, where your code fixes the sequence.</dd><dt>Context window</dt><dd>The maximum amount of text (in tokens) a model can consider in one call: system prompt, history, tool results and its own reply.</dd><dt>Eval</dt><dd>A test for an AI system: an input plus grading logic applied to the output.</dd><dt>Evaluator-optimizer</dt><dd>A workflow pattern in which one component generates, another evaluates and gives feedback, and the loop repeats.</dd><dt>Fake / test double</dt><dd>A stand-in object with the same interface as a real dependency, used so you can test your own logic deterministically and for free.</dd><dt>Generation (observation type)</dt><dd>An observation that represents one LLM call, carrying model name, token usage and output.</dd><dt>Grader</dt><dd>The logic that scores an outcome: code (a test), a model (a judge), or a human.</dd><dt>Harness</dt><dd>Everything around the model: prompts, tools, loop, state, budgets, and the checks that decide whether work is accepted.</dd><dt>Held-out test</dt><dd>A test the agent never sees, so that passing it is meaningful evidence of meeting the spec.</dd><dt>Keyset (cursor) pagination</dt><dd>Paging by remembering the last key you returned and asking for rows after it, instead of skipping N rows.</dd><dt>Mutant</dt><dd>A copy of working code with one deliberately planted bug, used to check that tests can fail.</dd><dt>Observation / span</dt><dd>One unit of work inside a trace, with a start, end, input, output and parent.</dd><dt>OpenTelemetry (OTel)</dt><dd>A vendor-neutral standard for traces, metrics and logs. Langfuse&#x27;s Python SDK builds on it.</dd><dt>Oracle (reference implementation)</dt><dd>A human-written solution that must pass the evals, used to prove the evals are fair.</dd><dt>Outcome-based</dt><dd>Deciding that work is done by grading the produced artifact, not by trusting the agent&#x27;s report.</dd><dt>pass@k / pass^k</dt><dd>The probability that at least one of k trials succeeds, versus that all k succeed.</dd><dt>Reward hacking / specification gaming</dt><dd>A system satisfying the letter of its objective in a way that defeats its intent, for example by exploiting graders it can see.</dd><dt>Self-preference bias</dt><dd>The tendency of an LLM evaluator to rate its own outputs higher than equally good outputs from other sources.</dd><dt>stop_reason</dt><dd>The field on a model response that says why generation ended: end_turn, tool_use, max_tokens, and others.</dd><dt>System prompt</dt><dd>Instructions given to the model separately from the conversation, setting its role and rules for the whole call.</dd><dt>Token</dt><dd>A sub-word chunk of text. Models read and write tokens, and APIs bill by them.</dd><dt>Tool use</dt><dd>A protocol where the model emits a structured request to call a function you defined, and your code runs it and returns the result.</dd><dt>Trace</dt><dd>The record of one end-to-end run as a tree of observations.</dd><dt>Trial</dt><dd>One attempt at a task. You run several, because results vary.</dd><dt>Workspace</dt><dd>In this course, the directory where the agent writes the generated project for one run.</dd></dl></section>
-<section class="appendix" id="appendix-c"><h2 class="sans" style="font-size:1.8rem">C. Troubleshooting</h2><table><thead><tr><th>Symptom</th><th>Likely cause</th><th>What to do</th></tr></thead><tbody><tr><td>An authentication or API-key error on a live step</td><td>The key is not set in <em>this</em> terminal.</td><td>Run <code>export ANTHROPIC_API_KEY=...</code> in the same session. Check with <code>echo ${ANTHROPIC_API_KEY:+set}</code>.</td></tr><tr><td>A 'model not found' style error</td><td>Your account does not offer the model string in <code>taskforge.yaml</code>.</td><td>Change the names under <code>models:</code>. They are the only place model names live.</td></tr><tr><td><code>ModuleNotFoundError: No module named 'harness'</code></td><td>You are not in the project root, or the package is not installed.</td><td><code>cd</code> to the folder that contains <code>harness/</code>, or run <code>pip install -e .</code> (Module 7).</td></tr><tr><td><code>No module named 'harness.reports'</code> or <code>'harness.judge'</code></td><td>Those files are created in Module 5.</td><td>Create them when you reach 5.1 and 5.2. Until then, <code>compare</code>, <code>triage</code> and <code>judge</code> are expected to fail.</td></tr><tr><td>pytest says <code>unrecognized arguments: --workspace</code></td><td>pytest did not load <code>evals/conftest.py</code>, where the option is registered.</td><td>Run from the project root and pass the tests path: <code>pytest evals/test_spec_api.py --workspace reference</code>.</td></tr><tr><td>Every criterion fails with <code>cannot import app.main</code></td><td>The workspace has no <code>app/main.py</code>, or the app crashes on import.</td><td>List the workspace: <code>ls runs/&lt;id&gt;/workspace/app</code>. Run <code>cd</code> into it and <code>python -c "import app.main"</code> to see the real error.</td></tr><tr><td><code>uvicorn: command not found</code></td><td>The virtual environment is not active.</td><td><code>source .venv/bin/activate</code>, then retry.</td></tr><tr><td><code>Address already in use</code> when starting uvicorn</td><td>Something else holds the port.</td><td>Use another port: <code>--port 8001</code>.</td></tr><tr><td><code>auth_check()</code> raises or prints False</td><td>Wrong keys, wrong base URL, or the Langfuse containers are not ready yet.</td><td>Wait for the web container to log <em>Ready</em>; confirm <code>LANGFUSE_BASE_URL=http://localhost:3000</code>; create fresh keys in the UI.</td></tr><tr><td>Runs succeed but no traces appear</td><td>Keys not exported in this terminal, or the process exits before the export queue drains.</td><td>Export all three Langfuse variables in the terminal you run from. Look for <code>[tracing] ignored error</code> lines. <code>run_pipeline</code> flushes at the end; custom scripts must call <code>flush()</code>.</td></tr><tr><td><code>AttributeError: ... has no attribute 'update_current_trace'</code></td><td>A tutorial written for an older Langfuse SDK.</td><td>SDK v4 replaced it with <code>propagate_attributes</code>. Follow the v3 to v4 migration guide.</td></tr><tr><td>A live run keeps ending 'exhausted' or 'stuck'</td><td>That is a result, not a malfunction.</td><td>Triage it (Module 6): read the failing criteria, the feedback the agent received, and the transcript.</td></tr><tr><td>Shell commands in the course fail on Windows</td><td>The course assumes bash.</td><td>Use WSL, or adapt the commands; the agent's own <code>run_command</code> tool also uses a shell.</td></tr></tbody></table></section>
+<section class="appendix" id="appendix-c"><h2 class="sans" style="font-size:1.8rem">C. Troubleshooting</h2><table><thead><tr><th>Symptom</th><th>Likely cause</th><th>What to do</th></tr></thead><tbody><tr><td>An authentication or API-key error on a live step</td><td>The key is not set in <em>this</em> terminal.</td><td>Run <code>export ANTHROPIC_API_KEY=...</code> in the same session. Check with <code>echo ${ANTHROPIC_API_KEY:+set}</code>.</td></tr><tr><td>A 'model not found' style error</td><td>Your account does not offer the model string in <code>taskforge.yaml</code>.</td><td>Change the names under <code>models:</code>. They are the only place model names live.</td></tr><tr><td><code>ModuleNotFoundError: No module named 'harness'</code></td><td>You are not in the project root.</td><td><code>cd</code> to the folder that contains <code>harness/</code> and run the command from there.</td></tr><tr><td><code>No module named 'harness.reports'</code> or <code>'harness.judge'</code></td><td>Those files are created in Module 5.</td><td>Create them when you reach 5.1 and 5.2. Until then, <code>compare</code>, <code>triage</code> and <code>judge</code> are expected to fail.</td></tr><tr><td>pytest says <code>unrecognized arguments: --workspace</code></td><td>pytest did not load <code>evals/conftest.py</code>, where the option is registered.</td><td>Run from the project root and pass the tests path: <code>pytest evals/test_spec_api.py --workspace reference</code>.</td></tr><tr><td>Every criterion fails with <code>cannot import app.main</code></td><td>The workspace has no <code>app/main.py</code>, or the app crashes on import.</td><td>List the workspace: <code>ls runs/&lt;id&gt;/workspace/app</code>. Run <code>cd</code> into it and <code>python -c "import app.main"</code> to see the real error.</td></tr><tr><td><code>uvicorn: command not found</code></td><td>The virtual environment is not active.</td><td><code>source .venv/bin/activate</code>, then retry.</td></tr><tr><td><code>Address already in use</code> when starting uvicorn</td><td>Something else holds the port.</td><td>Use another port: <code>--port 8001</code>.</td></tr><tr><td><code>auth_check()</code> raises or prints False</td><td>Wrong keys, wrong base URL, or the Langfuse containers are not ready yet.</td><td>Wait for the web container to log <em>Ready</em>; confirm <code>LANGFUSE_BASE_URL=http://localhost:3000</code>; create fresh keys in the UI.</td></tr><tr><td>Runs succeed but no traces appear</td><td>Keys not exported in this terminal, or the process exits before the export queue drains.</td><td>Export all three Langfuse variables in the terminal you run from. Look for <code>[tracing] ignored error</code> lines. <code>run_pipeline</code> flushes at the end; custom scripts must call <code>flush()</code>.</td></tr><tr><td><code>AttributeError: ... has no attribute 'update_current_trace'</code></td><td>A tutorial written for an older Langfuse SDK.</td><td>SDK v4 replaced it with <code>propagate_attributes</code>. Follow the v3 to v4 migration guide.</td></tr><tr><td>A live run keeps ending 'exhausted' or 'stuck'</td><td>That is a result, not a malfunction.</td><td>Triage it (Module 6): read the failing criteria, the feedback the agent received, and the transcript.</td></tr><tr><td>Shell commands in the course fail on Windows</td><td>The course assumes bash.</td><td>Use WSL, or adapt the commands; the agent's own <code>run_command</code> tool also uses a shell.</td></tr></tbody></table></section>
 <section class="appendix" id="appendix-d"><h2 class="sans" style="font-size:1.8rem">D. What was checked, and what was not</h2>
 <p>You asked for factual accuracy, so here is exactly what was verified while writing this, on <strong>October 14, 2026</strong>, and what was not.</p>
 <h5>Run and tested</h5>
@@ -5491,7 +5164,7 @@ echo &quot;done: now run: python3 -m venv .venv &amp;&amp; source .venv/bin/acti
 <li>The agent loop and planner through the <strong>real Anthropic SDK</strong> (1.13.0) against a mocked HTTP transport, confirming the actual request and response wire format, including parallel tool calls, <code>is_error</code>, and forced <code>tool_choice</code>.</li>
 <li>Tool-box safety behaviors: path escape, unknown tool, bad arguments, timeout, API-key filtering, and the <code>max_turns</code> cap.</li>
 <li>The Langfuse tracing code against the real SDK (4.18.0), capturing spans in memory: the tree and attributes in 4.1 are real. The v1.1 UI reference was served by uvicorn, and the API <code>curl</code> outputs shown are real.</li>
-<li>The installable <code>taskforge</code> command and <code>taskforge init</code>, in a fresh directory.</li>
+
 <li>This page's JavaScript was exercised in a simulated browser DOM (progress, quizzes, all widgets, copy buttons).</li>
 </ul>
 <h5>Not verified, and why you should check</h5>
