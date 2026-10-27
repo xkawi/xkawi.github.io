@@ -575,20 +575,26 @@ Toggles <span class="t-sb">`completed`</span> (false becomes true, true becomes 
     <span class="t-k">with</span> <span class="t-n">TestClient</span><span class="t-p">(</span><span class="t-n">module</span><span class="t-o">.</span><span class="t-n">app</span><span class="t-p">,</span> <span class="t-n">raise_server_exceptions</span><span class="t-o">=</span><span class="t-kc">False</span><span class="t-p">)</span> <span class="t-k">as</span> <span class="t-n">test_client</span><span class="t-p">:</span>
         <span class="t-k">yield</span> <span class="t-n">test_client</span>
     <span class="t-n">_purge_app_modules</span><span class="t-p">()</span>
-</code></pre></figure><details class="bg" open><summary>Background for this code</summary><dl><dt>pytest fixture</dt><dd>A function marked <code>@pytest.fixture</code> whose return (or <code>yield</code>) value is injected into any test that names it as a parameter. Code after <code>yield</code> is teardown. Fixtures are function-scoped by default, meaning a fresh one per test.</dd><dt><code>conftest.py</code></dt><dd>A special file pytest loads automatically; fixtures and hooks defined in it are available to all tests in that directory without importing.</dd><dt><code>pytest_addoption</code></dt><dd>A hook that registers a custom command-line flag, here <code>--workspace</code>, read back with <code>request.config.getoption</code>. It is how one suite is pointed at the reference app, a mutant, or the agent's output.</dd><dt><code>tmp_path</code>, <code>monkeypatch</code></dt><dd><code>tmp_path</code> is a fresh temporary directory per test. <code>monkeypatch.setenv</code> and <code>syspath_prepend</code> change the environment and import path for one test and undo themselves afterward.</dd><dt>The <code>sys.modules</code> purge</dt><dd>Python caches every imported module, so a second <code>import app.main</code> returns the first one. We delete <code>app</code> and its submodules before and after each test so the app is imported fresh, reading the new <code>TASKS_DB</code>.</dd><dt><code>TestClient</code></dt><dd>FastAPI's in-process HTTP client: it calls the ASGI app directly with no network. Using it as a context manager runs the app's startup and shutdown hooks. <code>raise_server_exceptions=False</code> turns unhandled exceptions in the app into HTTP 500 responses, so a test can report 'got 500' instead of crashing.</dd></dl></details></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c2-1-ex-s2"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 2 done</span></label><div class="stepbody"><p class="steptext">Create the reference implementation, <code>reference/app/main.py</code>. You need <em>something</em> to run the tests against. Read it for the techniques; you are not meant to memorize it.</p><figure class="code" data-lang="python"><figcaption><span class="fname">reference/app/main.py</span><span class="len">131 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code><span class="t-sd">&quot;&quot;&quot;Reference implementation of spec v1. It exists to validate the evals, not to be copied by the agent.&quot;&quot;&quot;</span>
+</code></pre></figure><details class="bg" open><summary>Background for this code</summary><dl><dt>pytest fixture</dt><dd>A function marked <code>@pytest.fixture</code> whose return (or <code>yield</code>) value is injected into any test that names it as a parameter. Code after <code>yield</code> is teardown. Fixtures are function-scoped by default, meaning a fresh one per test.</dd><dt><code>conftest.py</code></dt><dd>A special file pytest loads automatically; fixtures and hooks defined in it are available to all tests in that directory without importing.</dd><dt><code>pytest_addoption</code></dt><dd>A hook that registers a custom command-line flag, here <code>--workspace</code>, read back with <code>request.config.getoption</code>. It is how one suite is pointed at the reference app, a mutant, or the agent's output.</dd><dt><code>tmp_path</code>, <code>monkeypatch</code></dt><dd><code>tmp_path</code> is a fresh temporary directory per test. <code>monkeypatch.setenv</code> and <code>syspath_prepend</code> change the environment and import path for one test and undo themselves afterward.</dd><dt>The <code>sys.modules</code> purge</dt><dd>Python caches every imported module, so a second <code>import app.main</code> returns the first one. We delete <code>app</code> and its submodules before and after each test so the app is imported fresh, reading the new <code>TASKS_DB</code>.</dd><dt><code>TestClient</code></dt><dd>FastAPI's in-process HTTP client: it calls the ASGI app directly with no network. Using it as a context manager runs the app's startup and shutdown hooks. <code>raise_server_exceptions=False</code> turns unhandled exceptions in the app into HTTP 500 responses, so a test can report 'got 500' instead of crashing.</dd></dl></details></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c2-1-ex-s2"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 2 done</span></label><div class="stepbody"><p class="steptext">Create the reference implementation, <code>reference/app/main.py</code>. You need <em>something</em> to run the tests against. Read it for the techniques; you are not meant to memorize it.</p><figure class="code" data-lang="python"><figcaption><span class="fname">reference/app/main.py</span><span class="len">137 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code><span class="t-sd">&quot;&quot;&quot;Reference implementation of spec v1. It exists to validate the evals, not to be copied by the agent.&quot;&quot;&quot;</span>
 <span class="t-kn">import</span><span class="t-w"> </span><span class="t-nn">os</span>
 <span class="t-kn">import</span><span class="t-w"> </span><span class="t-nn">re</span>
 <span class="t-kn">import</span><span class="t-w"> </span><span class="t-nn">sqlite3</span>
-<span class="t-kn">from</span><span class="t-w"> </span><span class="t-nn">contextlib</span><span class="t-w"> </span><span class="t-kn">import</span> <span class="t-n">asynccontextmanager</span>
+<span class="t-kn">from</span><span class="t-w"> </span><span class="t-nn">collections.abc</span><span class="t-w"> </span><span class="t-kn">import</span> <span class="t-n">Iterator</span>
+<span class="t-kn">from</span><span class="t-w"> </span><span class="t-nn">contextlib</span><span class="t-w"> </span><span class="t-kn">import</span> <span class="t-n">asynccontextmanager</span><span class="t-p">,</span> <span class="t-n">contextmanager</span>
 
 <span class="t-kn">from</span><span class="t-w"> </span><span class="t-nn">fastapi</span><span class="t-w"> </span><span class="t-kn">import</span> <span class="t-n">FastAPI</span><span class="t-p">,</span> <span class="t-n">Request</span>
 <span class="t-kn">from</span><span class="t-w"> </span><span class="t-nn">fastapi.responses</span><span class="t-w"> </span><span class="t-kn">import</span> <span class="t-n">JSONResponse</span>
 
 
-<span class="t-k">def</span><span class="t-w"> </span><span class="t-nf">connect</span><span class="t-p">()</span> <span class="t-o">-&gt;</span> <span class="t-n">sqlite3</span><span class="t-o">.</span><span class="t-n">Connection</span><span class="t-p">:</span>
-    <span class="t-n">conn</span> <span class="t-o">=</span> <span class="t-n">sqlite3</span><span class="t-o">.</span><span class="t-n">connect</span><span class="t-p">(</span><span class="t-n">os</span><span class="t-o">.</span><span class="t-n">environ</span><span class="t-o">.</span><span class="t-n">get</span><span class="t-p">(</span><span class="t-s2">&quot;TASKS_DB&quot;</span><span class="t-p">,</span> <span class="t-s2">&quot;tasks.db&quot;</span><span class="t-p">))</span>
+<span class="t-nd">@contextmanager</span>
+<span class="t-k">def</span><span class="t-w"> </span><span class="t-nf">connect</span><span class="t-p">()</span> <span class="t-o">-&gt;</span> <span class="t-n">Iterator</span><span class="t-p">[</span><span class="t-n">sqlite3</span><span class="t-o">.</span><span class="t-n">Connection</span><span class="t-p">]:</span>
+    <span class="t-n">conn</span> <span class="t-o">=</span> <span class="t-n">sqlite3</span><span class="t-o">.</span><span class="t-n">connect</span><span class="t-p">(</span><span class="t-n">os</span><span class="t-o">.</span><span class="t-n">environ</span><span class="t-o">.</span><span class="t-n">get</span><span class="t-p">(</span><span class="t-s2">"TASKS_DB"</span><span class="t-p">,</span> <span class="t-s2">"tasks.db"</span><span class="t-p">))</span>
     <span class="t-n">conn</span><span class="t-o">.</span><span class="t-n">row_factory</span> <span class="t-o">=</span> <span class="t-n">sqlite3</span><span class="t-o">.</span><span class="t-n">Row</span>
-    <span class="t-k">return</span> <span class="t-n">conn</span>
+    <span class="t-k">try</span><span class="t-p">:</span>
+        <span class="t-k">with</span> <span class="t-n">conn</span><span class="t-p">:</span>  <span class="t-c1"># commits on success, rolls back on error</span>
+            <span class="t-k">yield</span> <span class="t-n">conn</span>
+    <span class="t-k">finally</span><span class="t-p">:</span>
+        <span class="t-n">conn</span><span class="t-o">.</span><span class="t-n">close</span><span class="t-p">()</span>  <span class="t-c1"># sqlite3's own context manager leaves the connection open</span>
 
 
 <span class="t-k">def</span><span class="t-w"> </span><span class="t-nf">init_db</span><span class="t-p">()</span> <span class="t-o">-&gt;</span> <span class="t-kc">None</span><span class="t-p">:</span>
@@ -706,7 +712,7 @@ Toggles <span class="t-sb">`completed`</span> (false becomes true, true becomes 
             <span class="t-k">return</span> <span class="t-n">error</span><span class="t-p">(</span><span class="t-mi">404</span><span class="t-p">,</span> <span class="t-s2">&quot;task not found&quot;</span><span class="t-p">)</span>
         <span class="t-n">conn</span><span class="t-o">.</span><span class="t-n">execute</span><span class="t-p">(</span><span class="t-s2">&quot;DELETE FROM tasks WHERE id = ?&quot;</span><span class="t-p">,</span> <span class="t-p">(</span><span class="t-n">task_id</span><span class="t-p">,))</span>
     <span class="t-k">return</span> <span class="t-n">to_task</span><span class="t-p">(</span><span class="t-n">row</span><span class="t-p">)</span>
-</code></pre></figure><details class="bg" open><summary>Background for this code</summary><dl><dt>Why manual validation</dt><dd>FastAPI normally validates input through type hints and answers <code>422</code>. The spec requires <code>400</code> with an <code>{"error": ...}</code> body, so these handlers read the raw request and validate by hand.</dd><dt>Bound parameters (<code>?</code> placeholders)</dt><dd><code>conn.execute("... WHERE id = ?", (task_id,))</code> sends the SQL and the values separately, so a value can never be interpreted as SQL. This is the standard defense against SQL injection (OWASP's SQL Injection Prevention cheat sheet). Building the string with an f-string is the mistake we plant in Module 2.2.</dd><dt><code>AUTOINCREMENT</code></dt><dd>In SQLite, <code>INTEGER PRIMARY KEY</code> may reuse the id of a deleted last row; adding <code>AUTOINCREMENT</code> guarantees ids only grow. That makes 'ascending by id' coincide with 'creation order' (sqlite.org/autoinc.html).</dd><dt>The <code>limit + 1</code> lookahead</dt><dd>To know whether more rows exist after this page, fetch one extra. If you got <code>limit + 1</code> rows, drop the extra and set <code>nextCursor</code> to the last kept id; otherwise it is null. This is how the reference satisfies AC-LIST-10.</dd><dt><code>with connect() as conn</code></dt><dd>In Python's <code>sqlite3</code>, using a connection as a context manager commits on success and rolls back on error. It does <em>not</em> close the connection, which is fine for a toy; a real service would pool or close connections.</dd><dt>Why <code>re.fullmatch</code> for ids</dt><dd><code>int()</code> accepts <code>" 7 "</code>, and <code>str.isdigit()</code> accepts non-ASCII digits. A strict <code>[0-9]+</code> pattern, anchored with <code>fullmatch</code>, matches exactly what the spec calls a positive integer.</dd><dt><code>lifespan</code></dt><dd>An async context manager FastAPI runs at startup and shutdown; here it creates the table.</dd></dl></details></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c2-1-ex-s3"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 3 done</span></label><div class="stepbody"><p class="steptext"><strong>Write three tests yourself before reading mine.</strong> Create <code>evals/test_mine.py</code> and implement AC-POST-1, AC-POST-3 and AC-LIST-1 from the spec. Remember the naming rule (<code>test_ac_post_1_...</code>) and that tests take the <code>client</code> fixture. Useful calls: <code>client.post("/tasks", json={...})</code>, <code>client.get("/tasks")</code>, <code>response.status_code</code>, <code>response.json()</code>.</p><figure class="code" data-lang="bash"><figcaption><span class="fname lang">bash</span><span class="len">1 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>pytest<span class="t-w"> </span>evals/test_mine.py<span class="t-w"> </span>--workspace<span class="t-w"> </span>reference<span class="t-w"> </span>-q
+</code></pre></figure><details class="bg" open><summary>Background for this code</summary><dl><dt>Why manual validation</dt><dd>FastAPI normally validates input through type hints and answers <code>422</code>. The spec requires <code>400</code> with an <code>{"error": ...}</code> body, so these handlers read the raw request and validate by hand.</dd><dt>Bound parameters (<code>?</code> placeholders)</dt><dd><code>conn.execute("... WHERE id = ?", (task_id,))</code> sends the SQL and the values separately, so a value can never be interpreted as SQL. This is the standard defense against SQL injection (OWASP's SQL Injection Prevention cheat sheet). Building the string with an f-string is the mistake we plant in Module 2.2.</dd><dt><code>AUTOINCREMENT</code></dt><dd>In SQLite, <code>INTEGER PRIMARY KEY</code> may reuse the id of a deleted last row; adding <code>AUTOINCREMENT</code> guarantees ids only grow. That makes 'ascending by id' coincide with 'creation order' (sqlite.org/autoinc.html).</dd><dt>The <code>limit + 1</code> lookahead</dt><dd>To know whether more rows exist after this page, fetch one extra. If you got <code>limit + 1</code> rows, drop the extra and set <code>nextCursor</code> to the last kept id; otherwise it is null. This is how the reference satisfies AC-LIST-10.</dd><dt><code>with connect() as conn</code></dt><dd>In Python's <code>sqlite3</code>, using a connection as a context manager commits on success and rolls back on error. It does <em>not</em> close the connection, so <code>connect()</code> wraps it with <code>@contextmanager</code> and closes it in <code>finally</code>. Every leaked connection holds an open file, and macOS allows a process only 256 by default, so a leaky app fails the eval suite partway through with <code>unable to open database file</code>.</dd><dt>Why <code>re.fullmatch</code> for ids</dt><dd><code>int()</code> accepts <code>" 7 "</code>, and <code>str.isdigit()</code> accepts non-ASCII digits. A strict <code>[0-9]+</code> pattern, anchored with <code>fullmatch</code>, matches exactly what the spec calls a positive integer.</dd><dt><code>lifespan</code></dt><dd>An async context manager FastAPI runs at startup and shutdown; here it creates the table.</dd></dl></details></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c2-1-ex-s3"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 3 done</span></label><div class="stepbody"><p class="steptext"><strong>Write three tests yourself before reading mine.</strong> Create <code>evals/test_mine.py</code> and implement AC-POST-1, AC-POST-3 and AC-LIST-1 from the spec. Remember the naming rule (<code>test_ac_post_1_...</code>) and that tests take the <code>client</code> fixture. Useful calls: <code>client.post("/tasks", json={...})</code>, <code>client.get("/tasks")</code>, <code>response.status_code</code>, <code>response.json()</code>.</p><figure class="code" data-lang="bash"><figcaption><span class="fname lang">bash</span><span class="len">1 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>pytest<span class="t-w"> </span>evals/test_mine.py<span class="t-w"> </span>--workspace<span class="t-w"> </span>reference<span class="t-w"> </span>-q
 </code></pre></figure><figure class="code out"><figcaption><span class="fname lang">Expected output (timing will differ)</span></figcaption><pre><code>...                                                                      [100%]
 3 passed in 0.2s</code></pre></figure><div class="callout tip"><strong>Tip.</strong> Make AC-POST-3 check <em>two</em> things: the 400, and that no task was created. Criteria that say 'and no task is created' are easy to under-test.</div></div></li><li class="step"><label class="chk"><input type="checkbox" data-step="c2-1-ex-s4"><span class="box" aria-hidden="true"></span><span class="sr">Mark step 4 done</span></label><div class="stepbody"><p class="steptext">Now create the full suite, <code>evals/test_spec_api.py</code>, and run it. Compare it with yours: where did you assert less, and which assertion would have caught a bug yours would miss?</p><details class="fold"><summary>Show evals/test_spec_api.py (about 170 lines)</summary><figure class="code" data-lang="python"><figcaption><span class="fname">evals/test_spec_api.py</span><span class="len">218 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code><span class="t-sd">&quot;&quot;&quot;Acceptance evals for spec.md. Each test name carries its criterion: test_ac_&lt;area&gt;_&lt;n&gt;_&lt;what&gt;.&quot;&quot;&quot;</span>
 <span class="t-kn">import</span><span class="t-w"> </span><span class="t-nn">pytest</span>
@@ -3012,11 +3018,233 @@ rm<span class="t-w"> </span>-f<span class="t-w"> </span>/tmp/tasks.db
 </div>
 </section>
 <section class="appendix" id="appendix-a"><h2 class="sans" style="font-size:1.8rem">A. Rebuild the finished project</h2>
-<p>If you fall behind or something is broken beyond repair, this script recreates every file of the finished project (all modules applied, including tracing, the judge and the UI evals) in an <em>empty</em> directory. It is also an answer key: compare your files with it when a step does not behave as described. After running it, create the virtual environment and install the requirements as in Module 0.</p>
-<details class="fold"><summary>Show the one-paste rebuild script (2138 lines)</summary><figure class="code" data-lang="text"><figcaption><span class="fname">bootstrap.sh</span><span class="len">2138 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>#!/usr/bin/env bash
+<p>If you fall behind or something is broken beyond repair, this script recreates every file of the finished project (all modules applied, including tracing, the judge and the UI evals) in an <em>empty</em> directory. It is also an answer key: compare your files with it when a step does not behave as described. And it writes a <code>README.md</code> that lists every command the finished project supports, offline and live, so you can copy and paste your way through the whole pipeline without working through the course first. After running it, create the virtual environment and install the requirements as in Module 0.</p>
+<details class="fold"><summary>Show the one-paste rebuild script (2373 lines)</summary><figure class="code" data-lang="text"><figcaption><span class="fname">bootstrap.sh</span><span class="len">2373 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>#!/usr/bin/env bash
 # Recreates the finished taskforge project (all modules applied). Run it in an EMPTY directory.
 set -euo pipefail
 
+mkdir -p &quot;$(dirname &#x27;README.md&#x27;)&quot;
+cat &gt; &#x27;README.md&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
+# taskforge: the finished course project
+
+A spec-driven, eval-gated agent pipeline. It reads `spec.md`, has a tool-using agent build the
+Task Tracker API it describes, and accepts the result only when the acceptance evals in `evals/` pass.
+
+Built step by step in the course &quot;Agents that ship when the spec says so&quot;:
+https://kawi.me/lessons/spec-driven-agent-pipeline/
+
+Every command below runs from this folder. Commands marked **[live]** call the Anthropic API: they
+need `ANTHROPIC_API_KEY` and cost money. Everything else runs offline, for free.
+
+## 1. Set up (once)
+
+Needs Python 3.11 or newer and a bash shell (macOS, Linux or WSL).
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate          # run this again in every new terminal
+pip install -r requirements.txt
+```
+
+Optional, only for **[live]** commands:
+
+```bash
+export ANTHROPIC_API_KEY=&quot;sk-ant-...&quot;
+python smoke.py                    # [live] checks that the key and the SDK work
+```
+
+## 2. Quick tour (offline, about two minutes)
+
+```bash
+# The evals: the reference app passes all 26 acceptance criteria
+python -m harness eval --workspace reference
+
+# The evals can fail: plant known bugs and see which criteria notice
+python scripts/mutate.py
+
+# The whole pipeline (plan, generate, evaluate, decide) with a scripted fake model.
+# Attempt 1 has a paging bug, the evals catch it, attempt 2 fixes it.
+python -m harness run --offline --tag normal
+
+# Read what the agent did on attempt 1
+python scripts/show.py runs/*-normal-*/attempt-1.jsonl
+
+# Run the app the pipeline built, then try it in a second terminal (see section 6)
+cd &quot;$(ls -d runs/*-normal-* | tail -1)/workspace&quot;
+rm -f /tmp/tasks.db &amp;&amp; TASKS_DB=/tmp/tasks.db uvicorn app.main:app --port 8000
+```
+
+Stop the server with Ctrl+C and `cd` back to the project folder before you continue.
+
+## 3. Evals
+
+```bash
+python -m harness eval --workspace reference                 # score a project against spec.md
+pytest evals/test_spec_api.py --workspace reference -q       # the same API tests, straight through pytest
+python scripts/mutate.py                                     # planted bugs and the criteria that catch them
+```
+
+`--workspace` takes any folder that contains `app/main.py`, so you can point it at a run&#x27;s
+`runs/&lt;run-id&gt;/workspace` too.
+
+## 4. The agent and its tools
+
+```bash
+python try_tools.py                # offline: call the agent&#x27;s tools directly
+python run_once.py                 # offline: one pipeline run with the fake model
+python hello_agent.py              # [live] the smallest real agent run; prints its transcript path
+python scripts/show.py &lt;transcript.jsonl&gt;   # pretty-print any transcript
+```
+
+## 5. Pipeline runs
+
+```bash
+# Offline: the fake model replays the reference app
+python -m harness run --offline --tag normal                         # bug on attempt 1, fixed on attempt 2
+python -m harness run --offline --offline-bug never --tag clean      # passes on attempt 1
+python -m harness run --offline --offline-bug always --tag stuck     # never fixed; watch the stuck detector stop it
+
+# [live] the real model builds the spec
+python -m harness run --tag baseline
+python -m harness run --tag baseline --trials 3                      # several trials, for comparisons
+```
+
+Each run writes `runs/&lt;date&gt;-&lt;time&gt;-&lt;tag&gt;-&lt;id&gt;/` with `record.json` (status, score, tokens),
+`attempt-N.jsonl` transcripts and the generated `workspace/`.
+
+```bash
+python scripts/show.py runs/*-baseline-*/attempt-1.jsonl
+cat runs/*-baseline-*/record.json
+```
+
+All `run` options: `--spec` (default `spec.md`), `--config` (default `taskforge.yaml`), `--tag`,
+`--trials`, `--runs-dir` (default `runs`), `--offline`, `--offline-bug first|never|always`,
+`--reference` (the folder the offline fake replays, default `reference`).
+
+## 6. Run and try the app
+
+Any folder with `app/main.py` can be served: `reference`, `reference_v1_1`, or a run&#x27;s `workspace`.
+
+```bash
+cd reference                       # or reference_v1_1, or runs/&lt;run-id&gt;/workspace
+rm -f /tmp/tasks.db                # start from an empty database
+TASKS_DB=/tmp/tasks.db uvicorn app.main:app --port 8000
+```
+
+In a second terminal:
+
+```bash
+curl -s -X POST localhost:8000/tasks -H &#x27;content-type: application/json&#x27; -d &#x27;{&quot;title&quot;:&quot;Buy milk&quot;}&#x27;
+curl -s -X POST localhost:8000/tasks -H &#x27;content-type: application/json&#x27; -d &#x27;{&quot;title&quot;:&quot;Write spec&quot;}&#x27;
+curl -s &#x27;localhost:8000/tasks?limit=1&#x27;                 # first page; note nextCursor
+curl -s -X PATCH localhost:8000/tasks/1/complete
+curl -si -X DELETE localhost:8000/tasks/abc | head -1  # invalid id: 400, not 422
+curl -s -X POST localhost:8000/tasks -H &#x27;content-type: application/json&#x27; -d &#x27;{}&#x27;
+```
+
+`reference_v1_1` also has a web UI: serve it as above and open http://127.0.0.1:8000/
+
+## 7. Traces in Langfuse (optional)
+
+Without Langfuse keys, tracing is switched off and everything else still works. To turn it on,
+run Langfuse locally with Docker, outside this folder:
+
+```bash
+cd ..
+git clone https://github.com/langfuse/langfuse.git
+cd langfuse
+docker compose up                  # leave it running; the first start takes a few minutes
+```
+
+Open http://localhost:3000, create a project and an API key, then back in this folder:
+
+```bash
+export LANGFUSE_PUBLIC_KEY=&quot;pk-lf-...&quot;
+export LANGFUSE_SECRET_KEY=&quot;sk-lf-...&quot;
+export LANGFUSE_BASE_URL=&quot;http://localhost:3000&quot;
+python -c &quot;from langfuse import get_client; print(&#x27;auth ok:&#x27;, get_client().auth_check())&quot;
+python -m harness run --offline --tag trace-demo     # then open the trace in Langfuse
+```
+
+## 8. Compare configurations and triage failures
+
+```bash
+# Offline: a healthy arm against an always-buggy arm
+python -m harness run --offline --tag arm-a --trials 3
+python -m harness run --offline --offline-bug always --tag arm-b --trials 3
+python -m harness compare arm-a arm-b
+python -m harness triage --tag arm-b        # which criteria fail most often
+python -m harness triage                    # across every run
+
+# [live] does the planner help?
+printf &#x27;use_planner: false\n&#x27; &gt; taskforge.no-planner.yaml
+python -m harness run --tag planner --trials 3
+python -m harness run --config taskforge.no-planner.yaml --tag noplanner --trials 3
+python -m harness compare planner noplanner
+```
+
+## 9. Quality checks the tests cannot see
+
+```bash
+python -m harness judge --workspace reference --offline     # static checks only (the llm column shows unknown offline)
+python -m harness judge --workspace reference               # [live] static checks plus the LLM judge
+```
+
+To see a quality bug that passes every functional test, plant one and judge it:
+
+```bash
+python - &lt;&lt;&#x27;EOF&#x27;
+import shutil
+from pathlib import Path
+shutil.rmtree(&quot;/tmp/ws-quality&quot;, ignore_errors=True)
+shutil.copytree(&quot;reference&quot;, &quot;/tmp/ws-quality&quot;, ignore=shutil.ignore_patterns(&quot;__pycache__&quot;))
+path = Path(&quot;/tmp/ws-quality/app/main.py&quot;)
+source = path.read_text()
+old = &#x27;conn.execute(&quot;DELETE FROM tasks WHERE id = ?&quot;, (task_id,))&#x27;
+path.write_text(source.replace(old, &#x27;conn.execute(f&quot;DELETE FROM tasks WHERE id = {task_id}&quot;)\n        print(&quot;deleted&quot;, task_id)&#x27;))
+EOF
+python -m harness eval --workspace /tmp/ws-quality | head -1    # still 26/26
+python -m harness judge --workspace /tmp/ws-quality --offline   # the static checks catch it
+```
+
+## 10. Spec v1.1: add the web UI
+
+`spec_ui_addendum.md` holds 5 more criteria (AC-UI-1 to AC-UI-5). Append it once to make them part of the spec:
+
+```bash
+cat spec_ui_addendum.md &gt;&gt; spec.md
+grep -c &#x27;^- \*\*AC-&#x27; spec.md                                  # 31
+python -m harness eval --workspace reference_v1_1 | head -1   # passes all 31
+python -m harness eval --workspace reference | head -6        # the old app now fails the UI criteria
+
+python -m harness run --offline --reference reference_v1_1 --tag v11-offline
+python -m harness run --tag v11                               # [live]
+```
+
+Then serve the run&#x27;s workspace as in section 6 and open http://127.0.0.1:8000/
+
+## Settings
+
+`taskforge.yaml` sets the models (planner, generator, judge), the limits (attempts, turns, tokens,
+stuck detection, command timeout), whether to use the planner, and `prompt_extra`, hints appended
+to the generator&#x27;s prompt. Pass a different file with `--config`.
+
+## Command reference
+
+| Command | What it does |
+|---|---|
+| `python -m harness run` | Build the spec with the pipeline (options in section 5) |
+| `python -m harness eval --workspace DIR [--spec FILE] [--evals DIR]` | Score a project against the spec |
+| `python -m harness compare TAG_A TAG_B [--runs-dir DIR]` | Compare two groups of runs |
+| `python -m harness triage [--tag TAG] [--runs-dir DIR]` | Rank failing criteria across runs |
+| `python -m harness judge --workspace DIR [--config FILE] [--offline]` | Static checks plus the LLM judge |
+| `python scripts/mutate.py` | Plant known bugs and show which criteria catch them |
+| `python scripts/show.py FILE...` | Pretty-print agent transcripts |
+| `python smoke.py` | [live] Check the API key and SDK |
+| `python try_tools.py` | Call the agent&#x27;s tools directly |
+| `python hello_agent.py` | [live] The smallest real agent run |
+| `python run_once.py` | One offline pipeline run |
+__TF_EOF__
 mkdir -p &quot;$(dirname &#x27;requirements.txt&#x27;)&quot;
 cat &gt; &#x27;requirements.txt&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
 anthropic&gt;=1.0
@@ -4688,16 +4916,22 @@ cat &gt; &#x27;reference/app/main.py&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
 import os
 import re
 import sqlite3
-from contextlib import asynccontextmanager
+from collections.abc import Iterator
+from contextlib import asynccontextmanager, contextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 
-def connect() -&gt; sqlite3.Connection:
+@contextmanager
+def connect() -&gt; Iterator[sqlite3.Connection]:
     conn = sqlite3.connect(os.environ.get(&quot;TASKS_DB&quot;, &quot;tasks.db&quot;))
     conn.row_factory = sqlite3.Row
-    return conn
+    try:
+        with conn:  # commits on success, rolls back on error
+            yield conn
+    finally:
+        conn.close()  # sqlite3&#x27;s own context manager leaves the connection open
 
 
 def init_db() -&gt; None:
@@ -4824,16 +5058,22 @@ cat &gt; &#x27;reference_v1_1/app/main.py&#x27; &lt;&lt;&#x27;__TF_EOF__&#x27;
 import os
 import re
 import sqlite3
-from contextlib import asynccontextmanager
+from collections.abc import Iterator
+from contextlib import asynccontextmanager, contextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 
 
-def connect() -&gt; sqlite3.Connection:
+@contextmanager
+def connect() -&gt; Iterator[sqlite3.Connection]:
     conn = sqlite3.connect(os.environ.get(&quot;TASKS_DB&quot;, &quot;tasks.db&quot;))
     conn.row_factory = sqlite3.Row
-    return conn
+    try:
+        with conn:  # commits on success, rolls back on error
+            yield conn
+    finally:
+        conn.close()  # sqlite3&#x27;s own context manager leaves the connection open
 
 
 def init_db() -&gt; None:
@@ -5151,6 +5391,7 @@ for path in paths:
     show(path)
 __TF_EOF__
 echo &quot;done: now run: python3 -m venv .venv &amp;&amp; source .venv/bin/activate &amp;&amp; pip install -r requirements.txt&quot;
+echo &quot;then see README.md for every command you can run&quot;
 </code></pre></figure></details>
 </section>
 <section class="appendix" id="appendix-b"><h2 class="sans" style="font-size:1.8rem">B. Glossary</h2><dl class="glossary"><dt>Acceptance criterion</dt><dd>One checkable statement about observable behavior, with a stable ID (AC-LIST-8). The spec&#x27;s unit of &#x27;done&#x27;.</dd><dt>Agent</dt><dd>A system where an LLM decides which tools to call and when to stop. Contrast with a workflow, where your code fixes the sequence.</dd><dt>Context window</dt><dd>The maximum amount of text (in tokens) a model can consider in one call: system prompt, history, tool results and its own reply.</dd><dt>Eval</dt><dd>A test for an AI system: an input plus grading logic applied to the output.</dd><dt>Evaluator-optimizer</dt><dd>A workflow pattern in which one component generates, another evaluates and gives feedback, and the loop repeats.</dd><dt>Fake / test double</dt><dd>A stand-in object with the same interface as a real dependency, used so you can test your own logic deterministically and for free.</dd><dt>Generation (observation type)</dt><dd>An observation that represents one LLM call, carrying model name, token usage and output.</dd><dt>Grader</dt><dd>The logic that scores an outcome: code (a test), a model (a judge), or a human.</dd><dt>Harness</dt><dd>Everything around the model: prompts, tools, loop, state, budgets, and the checks that decide whether work is accepted.</dd><dt>Held-out test</dt><dd>A test the agent never sees, so that passing it is meaningful evidence of meeting the spec.</dd><dt>Keyset (cursor) pagination</dt><dd>Paging by remembering the last key you returned and asking for rows after it, instead of skipping N rows.</dd><dt>Mutant</dt><dd>A copy of working code with one deliberately planted bug, used to check that tests can fail.</dd><dt>Observation / span</dt><dd>One unit of work inside a trace, with a start, end, input, output and parent.</dd><dt>OpenTelemetry (OTel)</dt><dd>A vendor-neutral standard for traces, metrics and logs. Langfuse&#x27;s Python SDK builds on it.</dd><dt>Oracle (reference implementation)</dt><dd>A human-written solution that must pass the evals, used to prove the evals are fair.</dd><dt>Outcome-based</dt><dd>Deciding that work is done by grading the produced artifact, not by trusting the agent&#x27;s report.</dd><dt>pass@k / pass^k</dt><dd>The probability that at least one of k trials succeeds, versus that all k succeed.</dd><dt>Reward hacking / specification gaming</dt><dd>A system satisfying the letter of its objective in a way that defeats its intent, for example by exploiting graders it can see.</dd><dt>Self-preference bias</dt><dd>The tendency of an LLM evaluator to rate its own outputs higher than equally good outputs from other sources.</dd><dt>stop_reason</dt><dd>The field on a model response that says why generation ended: end_turn, tool_use, max_tokens, and others.</dd><dt>System prompt</dt><dd>Instructions given to the model separately from the conversation, setting its role and rules for the whole call.</dd><dt>Token</dt><dd>A sub-word chunk of text. Models read and write tokens, and APIs bill by them.</dd><dt>Tool use</dt><dd>A protocol where the model emits a structured request to call a function you defined, and your code runs it and returns the result.</dd><dt>Trace</dt><dd>The record of one end-to-end run as a tree of observations.</dd><dt>Trial</dt><dd>One attempt at a task. You run several, because results vary.</dd><dt>Workspace</dt><dd>In this course, the directory where the agent writes the generated project for one run.</dd></dl></section>
