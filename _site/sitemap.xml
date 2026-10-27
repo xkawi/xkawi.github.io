@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://localhost:4000/articles/2025/web-refresh/</loc>
+<lastmod>2025-03-28T00:00:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/articles/2026/early-exposure-to-ai/</loc>
+<lastmod>2026-04-28T00:00:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/articles/2026/agents-that-ship-when-the-spec-says-so/</loc>
+<lastmod>2026-10-27T00:00:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/about/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/projects/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/articles/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/lessons/spec-driven-agent-pipeline/</loc>
+<lastmod>2026-10-27T21:39:45+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/slides/redux-saga-practical-intro/</loc>
+<lastmod>2026-04-13T19:24:20+08:00</lastmod>
+</url>
+</urlset>
