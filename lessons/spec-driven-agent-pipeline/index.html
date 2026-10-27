@@ -3019,7 +3019,7 @@ rm<span class="t-w"> </span>-f<span class="t-w"> </span>/tmp/tasks.db
 </section>
 <section class="appendix" id="appendix-a"><h2 class="sans" style="font-size:1.8rem">A. Rebuild the finished project</h2>
 <p>If you fall behind or something is broken beyond repair, this script recreates every file of the finished project (all modules applied, including tracing, the judge and the UI evals) in an <em>empty</em> directory. It is also an answer key: compare your files with it when a step does not behave as described. And it writes a <code>README.md</code> that lists every command the finished project supports, offline and live, so you can copy and paste your way through the whole pipeline without working through the course first. After running it, create the virtual environment and install the requirements as in Module 0.</p>
-<details class="fold"><summary>Show the one-paste rebuild script (2373 lines)</summary><figure class="code" data-lang="text"><figcaption><span class="fname">bootstrap.sh</span><span class="len">2373 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>#!/usr/bin/env bash
+<details class="fold"><summary>Show the one-paste rebuild script (2391 lines)</summary><figure class="code" data-lang="text"><figcaption><span class="fname">bootstrap.sh</span><span class="len">2391 lines</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre><code>#!/usr/bin/env bash
 # Recreates the finished taskforge project (all modules applied). Run it in an EMPTY directory.
 set -euo pipefail
 
@@ -3069,9 +3069,22 @@ python -m harness run --offline --tag normal
 # Read what the agent did on attempt 1
 python scripts/show.py runs/*-normal-*/attempt-1.jsonl
 
-# Run the app the pipeline built, then try it in a second terminal (see section 6)
+# Run the API the pipeline built
 cd &quot;$(ls -d runs/*-normal-* | tail -1)/workspace&quot;
 rm -f /tmp/tasks.db &amp;&amp; TASKS_DB=/tmp/tasks.db uvicorn app.main:app --port 8000
+```
+
+This is the v1 app: a JSON API with no web page, so http://localhost:8000/ answers
+`{&quot;detail&quot;:&quot;Not Found&quot;}`. Open http://localhost:8000/docs for FastAPI&#x27;s interactive API page, or try
+the `curl` commands in section 6 from a second terminal.
+
+To see the web UI instead, stop the server (Ctrl+C), go back to the project folder, and serve the
+v1.1 reference app, which adds the page:
+
+```bash
+cd reference_v1_1
+rm -f /tmp/tasks.db &amp;&amp; TASKS_DB=/tmp/tasks.db uvicorn app.main:app --port 8000
+# open http://localhost:8000/
 ```
 
 Stop the server with Ctrl+C and `cd` back to the project folder before you continue.
@@ -3123,7 +3136,12 @@ All `run` options: `--spec` (default `spec.md`), `--config` (default `taskforge.
 
 ## 6. Run and try the app
 
-Any folder with `app/main.py` can be served: `reference`, `reference_v1_1`, or a run&#x27;s `workspace`.
+Any folder with `app/main.py` can be served. What you get depends on the spec version it was built for:
+
+| Folder | http://localhost:8000/ |
+|---|---|
+| `reference`, or the `workspace` of a v1 run | API only: `/` returns `{&quot;detail&quot;:&quot;Not Found&quot;}`. Use `/tasks`, or `/docs` for an interactive API page. |
+| `reference_v1_1`, or the `workspace` of a v1.1 run (section 10) | The web UI, plus the same API |
 
 ```bash
 cd reference                       # or reference_v1_1, or runs/&lt;run-id&gt;/workspace
@@ -3142,7 +3160,7 @@ curl -si -X DELETE localhost:8000/tasks/abc | head -1  # invalid id: 400, not 42
 curl -s -X POST localhost:8000/tasks -H &#x27;content-type: application/json&#x27; -d &#x27;{}&#x27;
 ```
 
-`reference_v1_1` also has a web UI: serve it as above and open http://127.0.0.1:8000/
+For the web UI, serve `reference_v1_1` (or a v1.1 run) as above and open http://localhost:8000/
 
 ## 7. Traces in Langfuse (optional)
 
