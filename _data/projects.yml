@@ -41,6 +41,23 @@
     - Deployment Automation
     - Docker
   status: active
+  featured: false
+  year: 2026
+
+- title: "Agents That Ship When the Spec Says So"
+  url: "/lessons/spec-driven-agent-pipeline/"
+  type: website
+  description: >
+    An interactive, hands-on course on spec-driven agent development: write a spec with acceptance
+    criteria, prove the evals can fail, then hand-build the agent loop, tracing and feedback loop
+    around it in Python with the raw Anthropic API. Runs offline, no API key needed to finish.
+  tags:
+    - AI Agent
+    - Evals
+    - Spec-Driven Development
+    - Python
+    - Course
+  status: active
   featured: true
   year: 2026
 
