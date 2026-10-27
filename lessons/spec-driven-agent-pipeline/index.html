@@ -68,6 +68,15 @@ h1, h2, h3, h4, h5, .sans { font-family: "Bricolage Grotesque", "Avenir Next", "
 .side .tools { display: flex; gap: .5rem; margin-top: 1.25rem; padding: 0 .5rem; flex-wrap: wrap; }
 .side button, .toolbtn { font: 600 .82rem "Bricolage Grotesque", system-ui, sans-serif; background: transparent; color: var(--ink); border: 1px solid var(--line); padding: .35rem .65rem; border-radius: 4px; cursor: pointer; }
 .side button:hover, .toolbtn:hover { background: var(--surface2); }
+.viewsw { flex-basis: 100%; margin-bottom: .25rem; }
+.seg { display: flex; align-items: center; gap: 0; }
+.seg span { font-weight: 700; margin-right: .6rem; }
+.side .seg button { border-radius: 0; margin-left: -1px; }
+.side .seg button:first-of-type { border-radius: 4px 0 0 4px; margin-left: 0; }
+.side .seg button:last-of-type { border-radius: 0 4px 4px 0; }
+.side .seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); position: relative; }
+.viewnote { margin: .4rem 0 0; color: var(--ink2); font-size: .8rem; line-height: 1.35; }
+@media print { .side, .pager, .pager-hint { display: none !important; } .layout { display: block; } }
 .navd > summary { display: none; }
 main { padding: 0 clamp(1rem, 4vw, 3.25rem) 6rem; min-width: 0; }
 .wrap { max-width: 52rem; margin: 0 auto 0 0; }
@@ -231,6 +240,18 @@ main { padding: 0 clamp(1rem, 4vw, 3.25rem) 6rem; min-width: 0; }
 .appendix { padding-top: 3.5rem; }
 .glossary dt { font: 700 1rem "Bricolage Grotesque", sans-serif; margin-top: .9rem; }
 .glossary dd { margin: .25rem 0 0; max-width: 66ch; }
+.pager { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.pager a { flex: 1 1 14rem; max-width: 24rem; padding: .85rem 1.1rem; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); text-decoration: none; font: 600 1rem/1.35 "Bricolage Grotesque", system-ui, sans-serif; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; margin-bottom: .2rem; font-size: .8rem; font-weight: 500; color: var(--ink2); }
+.pager .next { margin-left: auto; text-align: right; }
+.paged .concept:focus, .paged .appendix:focus, .paged #start:focus { outline: none; }
+.pager-hint { flex-basis: 100%; margin: 0; color: var(--ink2); font: 500 .8rem "Bricolage Grotesque", system-ui, sans-serif; }
+@media (hover: none) { .pager-hint { display: none; } }
+html.paged { scroll-behavior: auto; }  /* the browser's anchor scroll must not animate past the swapped-in lesson */
+.paged .module, .paged .appendix { padding-top: 2.5rem; }
+.paged .mhead[hidden] + .concept { margin-top: 0; padding-top: 0; border-top: 0; }
+.pager:not([hidden]) + .foot { margin-top: 2.5rem; }
 .foot { margin-top: 4rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--ink2); font-size: .92rem; }
 
 @media (max-width: 62rem) {
@@ -5577,6 +5598,7 @@ echo &quot;done: now run: python3 -m venv .venv &amp;&amp; source .venv/bin/acti
   const byId = {}; navLinks.forEach(a => { byId[a.getAttribute('href').slice(1)] = a; });
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => {
+      if (!state.showAll) return;  // paged mode marks the current lesson itself
       entries.forEach(en => {
         if (en.isIntersecting && byId[en.target.id]) {
           navLinks.forEach(a => a.classList.remove('active'));
@@ -5591,6 +5613,96 @@ echo &quot;done: now run: python3 -m venv .venv &amp;&amp; source .venv/bin/acti
   const syncNav = () => { if (navd && wide) navd.open = wide.matches; };
   syncNav(); if (wide && wide.addEventListener) wide.addEventListener('change', syncNav);
   navLinks.forEach(a => a.addEventListener('click', () => { if (navd && wide && !wide.matches) navd.open = false; }));
+
+  /* ---------- one lesson per page ---------- */
+  const hero = $('.hero');
+  const pages = [$('#start'), ...$$('.concept, .appendix')];
+  const sections = [hero, ...pages, ...$$('.module'), ...$$('.mhead')];
+  const baseTitle = document.title;
+  const label = p => p.id === 'start' ? 'Introduction' : (byId[p.id] ? byId[p.id].textContent : p.id);
+  const pager = document.createElement('nav');
+  pager.className = 'pager'; pager.setAttribute('aria-label', 'Lesson navigation');
+  $('.foot').before(pager);
+  const hint = document.createElement('p');
+  hint.className = 'pager-hint'; hint.textContent = 'Tip: use the \u2190 and \u2192 arrow keys to move between lessons.';
+  const findKey = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? '\u2318F' : 'Ctrl+F';
+  const viewSw = document.createElement('div');
+  viewSw.className = 'viewsw';
+  viewSw.innerHTML = `<div class="seg" role="group" aria-labelledby="viewsw-label"><span id="viewsw-label">View</span>` +
+    `<button type="button" data-view="paged">One lesson</button><button type="button" data-view="all">All</button></div>` +
+    `<p class="viewnote">All: one long page you can search with ${findKey} or print.</p>`;
+  $('.side .tools').prepend(viewSw);
+  function pageFor(id) {
+    let el = null;
+    try { el = id ? document.getElementById(decodeURIComponent(id)) : null; } catch (e) { el = null; }
+    if (!el || el === hero || hero.contains(el)) return { page: pages[0], el: null };
+    if (el.classList.contains('module')) return { page: $('.concept', el), el: null };
+    const page = pages.find(p => p.contains(el));
+    return page ? { page, el: el === page ? null : el } : { page: pages[0], el: null };
+  }
+  function jump(el) {  // instant, not smooth: the content under the viewport has just been swapped
+    root.style.scrollBehavior = 'auto';
+    if (el) el.scrollIntoView(); else window.scrollTo(0, 0);
+    root.style.scrollBehavior = '';
+  }
+  function render(scroll, focus) {
+    const paged = !state.showAll;
+    const { page, el } = pageFor(location.hash.slice(1));
+    $$('button', viewSw).forEach(b => b.setAttribute('aria-pressed', String((b.dataset.view === 'paged') === paged)));
+    root.classList.toggle('paged', paged);
+    pager.hidden = !paged;
+    if (!paged) {
+      sections.forEach(sec => { sec.hidden = false; });
+      document.title = baseTitle;
+      if (scroll) jump(el || (page.id === 'start' ? null : page));
+      return;
+    }
+    const mod = page.closest('.module');
+    sections.forEach(sec => { sec.hidden = true; });
+    page.hidden = false;
+    if (page.id === 'start') hero.hidden = false;
+    if (mod) { mod.hidden = false; $('.mhead', mod).hidden = $('.concept', mod) !== page; }
+    const i = pages.indexOf(page), prev = pages[i - 1], next = pages[i + 1];
+    pager.innerHTML =
+      (prev ? `<a class="prev" href="#${prev.id}" aria-keyshortcuts="ArrowLeft"><small>Previous</small>${esc(label(prev))}</a>` : '') +
+      (next ? `<a class="next" href="#${next.id}" aria-keyshortcuts="ArrowRight"><small>Next</small>${esc(label(next))}</a>` : '');
+    pager.append(hint);
+    navLinks.forEach(a => a.classList.remove('active'));
+    if (byId[page.id]) byId[page.id].classList.add('active');
+    document.title = page.id === 'start' ? baseTitle : `${label(page)} · ${baseTitle}`;
+    if (scroll) jump(el);
+    if (focus && !el) {  // move focus so keyboard and screen-reader users start at the new lesson
+      if (!page.hasAttribute('tabindex')) page.setAttribute('tabindex', '-1');
+      page.focus({ preventScroll: true });
+    }
+  }
+  viewSw.addEventListener('click', ev => {
+    const b = ev.target.closest('button[data-view]');
+    if (!b || (b.dataset.view === 'all') === !!state.showAll) return;
+    if (state.showAll) {  // keep the reader on the lesson they had scrolled to
+      const active = $('.side a.active');
+      if (active) history.replaceState(null, '', active.getAttribute('href'));
+    }
+    state.showAll = !state.showAll; save(); render(true);
+  });
+  window.addEventListener('beforeprint', () => {  // print the whole course, whatever the view
+    if (state.showAll) return;
+    sections.forEach(sec => { sec.hidden = false; }); pager.hidden = true;
+  });
+  window.addEventListener('afterprint', () => { if (!state.showAll) render(false); });
+  window.addEventListener('hashchange', () => render(true, true));
+  document.addEventListener('keydown', ev => {
+    if (state.showAll || ev.defaultPrevented || ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey) return;
+    if (ev.key !== 'ArrowLeft' && ev.key !== 'ArrowRight') return;
+    const t = ev.target;
+    if (t.closest && t.closest('input, select, textarea, [contenteditable], .trow')) return;
+    const sel = window.getSelection && window.getSelection();  // a click inside a wide code block: arrows scroll it
+    const box = sel && sel.anchorNode && sel.anchorNode.parentElement && sel.anchorNode.parentElement.closest('pre, table, .wpre');
+    if (box && box.scrollWidth > box.clientWidth) return;
+    const link = $(ev.key === 'ArrowLeft' ? '.pager .prev' : '.pager .next');
+    if (link) { ev.preventDefault(); location.hash = link.getAttribute('href'); }
+  });
+  render(true);
 
   /* ---------- quizzes ---------- */
   function initQuiz(el) {
