@@ -3,10 +3,14 @@ google_analytics: G-3GB074W5ET
 title:       Kawi Xiao
 description: Full Stack Engineer.
 author:      Kawi Xiao
-url:         "https://xkawi.github.io"
+url:         "https://kawi.me"  # matches CNAME; the sitemap and robots.txt use it for absolute links
 
 # Articles live at /articles/2017/redux-saga-managing-side-effects/
 permalink: /articles/:year/:title/
+
+# Generates /sitemap.xml and /robots.txt (supported on GitHub Pages)
+plugins:
+  - jekyll-sitemap
 
 markdown: kramdown
 kramdown:
@@ -33,3 +37,28 @@ defaults:
       path: "articles"
     values:
       main_class: main-panel-scroll
+  # Keep the reveal.js demo/test pages and the Search Console verification file out of the sitemap
+  - scope:
+      path: "slides/redux-saga-practical-intro/test"
+    values:
+      sitemap: false
+  - scope:
+      path: "slides/redux-saga-practical-intro/plugin"
+    values:
+      sitemap: false
+  - scope:
+      path: "slides/redux-saga-practical-intro/css"
+    values:
+      sitemap: false
+  - scope:
+      path: "slides/redux-saga-practical-intro/demo.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "slides/redux-saga-practical-intro/index-old.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "googlead31554229cc38a8.html"
+    values:
+      sitemap: false
